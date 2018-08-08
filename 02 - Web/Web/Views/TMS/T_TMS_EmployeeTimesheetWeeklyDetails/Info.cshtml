@@ -1,0 +1,61 @@
+@using Biz.TMS
+@using Biz.TMS.Services
+@model EMPWeelFilter
+
+@{ 
+    
+}
+<form id="frmdate_@Model.Number">
+    <input type="hidden" id="FromDate_@Model.Number" name="StartWeek" class="frmfilter" value="@Model.FromDate.ToString("dd/MM/yyyy")" />
+    <input type="hidden" id="ToDate_@Model.Number" name="StartWeek" class="frmfilter" value="@Model.ToDate.ToString("dd/MM/yyyy")" />
+    <input type="hidden" id="StartWeek_@Model.Number" name="StartWeek" class="frmfilter" value="@Model.StartWeek.ToString("dd/MM/yyyy")" />
+    <input type="hidden" id="EndWeek_@Model.Number" class="frmfilter" value="@Model.EndWeek.ToString("dd/MM/yyyy")" />
+    <input type="hidden" id="EndDateWeek_@Model.Number" class="frmfilter" value="@Model.EndDateWeek.ToString("dd/MM/yyyy")" />
+    <input type="hidden" id="EmployeeCode_@Model.Number" class="frmfilter" value="@Model.EmployeeCode" />
+    <input type="hidden" id="Number_@Model.Number" class="frmfilter" value="@Model.Number" />
+</form>
+    <section>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="padding:10px;" class="custom tblweek">
+                                <table class="table table-striped table-bordered tblcenter ifind" target_table="TMSmployeeWeekly"  arr-id="wk_@Model.Number"
+                                       PageName='@L("TMSmployeeWeekly")' data-url='@Url.Action("GetEmpWeeklyData", "TMSEmployeeWeekly", new  {searchprm= "{'FromDate':'"+Model.StartWeek.ToString("dd/MM/yyyy")+"','ToDate':'"+Model.EndWeek.ToString("dd/MM/yyyy")+"','EmployeeCode':'"+Model.EmployeeCode+"'}" })' key="Raw"
+                                       id="dtbTMSmployeeWeekly_@Model.Number" default-search="" allow-search="0" allow-sort="0" allow-chk="0" allow-Expand="0" link-Expand="" ofn="ChangeColor(this)"></table>
+                                <input type='hidden' value="['Raw']" id='wk_@Model.Number' />
+                                <input type='hidden' value="" id='dtbProviderTotalRecord' />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<div id="tblweek_@Model.Number" class="custom tblweek">
+
+</div>
+
+<script language="javascript">
+    $(document).ready(function () {
+        AddColumn("StartWeek_"+@Model.Number,"EndWeek_"+@Model.Number,"wk_@Model.Number");
+        TableReportShow("dtbTMSmployeeWeekly_@Model.Number");
+        LoadNextWeek("EndWeek_"+@Model.Number,"EndDateWeek_"+@Model.Number,"{'FromDate':'@Model.FromDate.ToString("dd/MM/yyyy")','ToDate':'@Model.ToDate.ToString("dd/MM/yyyy")','EndWeek':'@Model.EndWeek.ToString("dd/MM/yyyy")','EndDateWeek':'@Model.EndDateWeek.ToString("dd/MM/yyyy")','Number':'@Model.Number','EmployeeCode':'@Model.EmployeeCode'}",@Model.Number);
+       
+    });
+    @*function loadDefaultData() {
+        AddColumn();
+            var url = '@Url.Action("GetEmpWeeklyData", "TMSEmployeeWeekly")';
+        var js = form_to_json("frmdate", "frmfilter");
+        url += "?searchprm=" + JSON.stringify(js);
+        $("#dtbTMSmployeeWeekly").attr("data-url", url);
+        $("#dtbTMSmployeeWeekly").DataTable().destroy();
+        $("#dtbTMSmployeeWeekly").html('');
+
+
+         //   TableReportShow("dtbTMSmployeeWeekly");
+    }*@
+
+
+</script>

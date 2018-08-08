@@ -1,0 +1,123 @@
+@using Biz.OG.Models
+@model T_LMS_Master_AnnualLeave
+@{
+    ViewBag.Title = "T_LMS_Master_AnnualLeave";
+}
+@using (Ajax.BeginForm("Create", "T_LMS_Master_AnnualLeave", 
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+		UpdateTargetId ="T_LMS_Master_AnnualLeavelist",
+        LoadingElementId ="loadingDisplay",
+        OnSuccess ="closePopup()",
+        OnBegin = "onBegin", 
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+                    @Html.ValidationSummary(true)
+					 @Html.HiddenFor(m => m.)
+ <div class="ibox float-e-margins">
+     <div class="ibox-title">
+         @L("T_LMS_Master_AnnualLeave")
+     </div>
+     <div class="ibox-content">
+	 <div id="loadingDisplay" class="progressBarLoad">
+             <h2>@L("Progressing")...</h2>
+             <div class="progress progress-striped ">
+                 <div id="loadProgressBar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+             </div>
+         </div>
+	   <div class="form-group">
+             <label class="col-sm-2 control-label">@L("Grade_Id")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Grade_Id, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("Grade_Id")} })
+               @Html.ValidationMessageFor(model => model.Grade_Id, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("NoOfDays")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.NoOfDays, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("NoOfDays")} })
+               @Html.ValidationMessageFor(model => model.NoOfDays, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("CreatedBy")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("CreatedBy")} })
+               @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("CreatedDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("CreatedDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ModifiedBy")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ModifiedBy")} })
+               @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ModifiedDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ModifiedDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("Description")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("Description")} })
+               @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("IsManualEntry")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.IsManualEntry, new { htmlAttributes = new { @class = "form-control i-checks js-switch", @placeholder=L("IsManualEntry")} })
+               @Html.ValidationMessageFor(model => model.IsManualEntry, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("IsAcitve")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.IsAcitve, new { htmlAttributes = new { @class = "form-control i-checks js-switch", @placeholder=L("IsAcitve")} })
+               @Html.ValidationMessageFor(model => model.IsAcitve, "", new { @class = "text-danger" })
+             </div>
+         </div>
+       
+
+     </div>
+     
+         <div class="hr-line-dashed"></div>
+
+         <div class="form-group">
+             <div class="col-sm-12">
+                 <button type="submit" class="btn btn-primary btn-block" name="btnsave" value="save">@L("SaveChange")</button>
+             </div>
+         </div>
+     </div>
+
+
+ }
+
+
+  @Scripts.Render("~/bundles/jqueryval")
+
+   <script>
+    $(document).ready(function () {
+	 var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+		 elems.forEach(function (html) {
+		     var switchery = new Switchery(html, { color: '#1AB394' });
+		 });
+		   $('.date').datepicker({
+		     todayBtn: "linked",
+		     keyboardNavigation: false,
+		     forceParse: false,
+		     calendarWeeks: true,
+		     autoclose: true
+		 });
+    });
+</script>

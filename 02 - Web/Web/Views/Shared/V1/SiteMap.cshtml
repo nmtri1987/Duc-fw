@@ -1,0 +1,37 @@
+﻿@using Biz.Core.Models
+@using Biz.Core.Services
+@model DNHSiteMap
+@{
+    DNHSiteMapCollection myChild =  DNHSiteMapManager.GetAllByUser(CurrentUser.UserName, Model.CompanyID, Model.NodeID);
+    DNHSiteMap objitem;
+    if (myChild.Count > 0)
+    {
+        <ul class="menu-content" style="">
+            @for (int j = 0; j < myChild.Count; j++)
+            {
+                objitem = myChild[j];
+                if (objitem != null)
+                {
+                     
+                <li>
+                    @if (objitem.IsFolder || objitem.Expanded || string.IsNullOrEmpty(objitem.Url))
+                    {
+                        <a href="#" link='@DNHUrl(objitem.Url)' dis="mainctn">@L(objitem.Title)</a>
+                    }
+                    else
+                    {
+                        <a class="mysitemap menu-item" href="#" link='@DNHUrl(objitem.Url)' dis="mainctn">@L(objitem.Title)</a>
+                    }
+                    
+                    @if (myChild.Count > 0)
+                    {
+                        @Html.Partial("V1/SiteMap", objitem)
+                    }
+                </li>
+                   
+                }
+            }
+        </ul>
+    }
+
+}

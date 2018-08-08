@@ -1,0 +1,45 @@
+@using Biz.OG.Models
+@model T_COM_Master_Employee_PositionCollection
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5>@L("PositionHistory")</h5>
+        <div class="ibox-tools">
+            <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+                <li>
+                    <a href="#">Config option 1</a>
+                </li>
+                <li>
+                    <a href="#">Config option 2</a>
+                </li>
+            </ul>
+            <a class="close-link">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+    </div>
+    @*<div class="ibox-content ibox-heading">
+        <h3>@L("CurrentPosition")</h3>
+        <small><i class="fa fa-map-marker"></i> Meeting is on 6:00am. Check your schedule to see detail.</small>
+    </div>*@
+    <div class="ibox-content no-padding">
+        <ul class="list-group">
+            @foreach (T_COM_Master_Employee_Position item in Model)
+            {
+            <li class="list-group-item">
+                <div>
+                    <small class="pull-right">@item.Salary.ToString("0,0") @item.HostCountryCurrency</small>
+                    <p><a href="#" class="text-info">@item.PositionName</a> </p>
+                    <small class="block text-muted"><i class="fa fa-clock-o"></i> @item.EffectiveFrom.ToString("dd-MMM-yyyy")</small>
+                </div>
+
+            </li>
+            }
+        </ul>
+    </div>
+</div>

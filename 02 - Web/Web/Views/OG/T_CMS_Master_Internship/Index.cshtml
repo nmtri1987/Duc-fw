@@ -1,0 +1,11 @@
+@{
+    ViewBag.Title = "T_CMS_Master_Internship";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+<div id="T_CMS_Master_Internshiplist">
+    @Html.Action("List")
+</div>

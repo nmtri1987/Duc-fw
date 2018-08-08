@@ -1,0 +1,273 @@
+﻿@using Biz.TMS
+@using Biz.TMS.Services
+@using Biz.OG.Services
+@{
+    ViewBag.Title = "T_TMS_EmployeeTimesheetWeeklyDetails";
+    //string condition = "";
+    RBVHSearchFilter SearchKey = RBVHSearchFilter.SearchPG(1, 1, 2000, "EmployeeCode,FirstName_EN,MiddleName_EN,LastName_EN,DomainId", "EmployeeCode", "Desc", "");
+    if ("dgn2hc,rat2hc,THN10HC".LastIndexOf(CurrentUser.UserName.ToLower())!=-1)
+    {
+        SearchKey.EntityID = 10003;
+    }
+    else
+    {
+        SearchKey.EntityID = CurrentUser.EntityID;
+        //SearchKey.Condition = "  ";
+    }
+}
+
+<style>
+    div.dataTables_wrapper .dataTables_length, div.dataTables_wrapper .dataTables_info, div.dataTables_wrapper .dataTables_paginate {
+        display: none;
+    }
+</style>
+@using (Ajax.BeginForm("T_TMS_EmployeeTimesheetWeeklyDetailsEvt", "TMSmployeeWeekly",
+                                                                                                                                                    new AjaxOptions
+                                                                                                                                                    {
+                                                                                                                                                        InsertionMode = InsertionMode.Replace,
+                                                                                                                                                        HttpMethod = "POST",
+                                                                                                                                                        UpdateTargetId = "T_TMS_EmployeeTimesheetWeeklyDetailslist",
+                                                                                                                                                        OnBegin = "onBegin",
+                                                                                                                                                        OnComplete = "onComplete",
+                                                                                                                                                    }, new { @class = "form-horizontal", enctype = "multipart/form-data", id = "myform" }))
+{
+    <div>
+        <input type="hidden" id="startPeriod" value="16/08/2017"  />
+        <input type="hidden" id="EndPeriod" value="15/09/2017" />
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <section>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="filter" id="frmFilter" name="frmFilter">
+                                <hr />
+                                <h4 class="form-section"><i class="fa fa-filter"></i>  @L("Week In/Out")</h4>
+                                <div class="card-body px-1">
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">@L("Period")</label>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownList("Dow_ID",
+                                new SelectList(ls_PayrollDOWS_RBVHManager.GetAll(CurrentUser.EntityID), "Dow_ID", "Dow_Code"), @L("-- All--"),
+                                new { @class = "form-control  select-control frmfilter chosen-select", @id = "Period" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="col-sm-4 control-label">@L("Employee")</label>
+                                                <div class="col-sm-8">
+                                                    @Html.DropDownList("EmployeeCode",
+                                new SelectList(Biz.Core.Services.RBVHEmployeeManager.Search(SearchKey), "EmployeeCode", "EmpNoFullName"), @L("-- All--"),
+                                new { @class = "form-control  select-control frmfilter chosen-select", @id = "EmployeeCode" })
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="button" class="btn btn-primary " id="btnDailySearch" data-url='@Url.Action("GetEmpWeeklyData", "TMSmployeeWeekly")' data-query="EmployeCD,fromdate,todate" data-targetid="tbListEmploy">
+                                                <i class="fa fa-search"></i>
+                                                @L("Search")
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div id="EmpDisplay">
+
+            </div>
+        </div>
+        <div class="col-md-3">
+            <section>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="filter" id="frmFilter" name="frmFilter">
+                                <hr />
+
+                                <div class="card-body px-1">
+                                    <div class="row" style="min-height:600px;">
+                                        <img src="~/Images/L_272A.tmp.PNG" style="width:100%;" />
+                                        @*<div style="margin:10px;background-color:palevioletred; min-height:150px;">
+                                                 <ul>
+                                                     <li>
+                                                         Description
+                                                     </li>
+                                                 </ul>
+                                             </div>
+                                            <div style="margin:10px;background-color:silver; min-height:30px; text-align:center;vertical-align:middle; font-weight:bolder;padding-top:10px;"
+                                                 >Core Time</div>
+                                            <div class="row">
+                                                <div class="col-md-3">
+
+                                                </div>
+                                                <div class="col-md-6" style="text-align:center;">
+
+                                                    <div style="background-color:forestgreen;min-height:50px;"></div>
+                                                    <div style="background-color:cornflowerblue ;min-height:150px;">be hoc to mau</div>
+                                                    <div style="background-color:forestgreen;min-height:50px;"></div>
+                                                </div>
+                                                <div class="col-md-3">
+
+                                                </div>
+                                            </div>*@
+                                    </div>
+
+                                    <div id="log"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    @*<section>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div style="padding:10px;">
+                                    <table class="table table-striped table-bordered" target_table="TMSmployeeWeekly" arr-id="Providerarr"
+                                           PageName='@L("TMSmployeeWeekly")' data-url='@Url.Action("GetEmpWeeklyData", "TMSmployeeWeekly")' key="Raw"
+                                           id="dtbTMSmployeeWeekly" default-search="" allow-search="0" allow-sort="0" allow-chk="0" allow-Expand="0" link-Expand=""></table>
+                                    <input type='hidden' value="['Raw']" id='Providerarr' />
+                                    <input type='hidden' value="" id='dtbProviderTotalRecord' />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+
+}
+<script language="javascript">
+    $(document).ready(function () {
+    
+        $(".chosen-select").select2();
+     
+        $("#btnDailySearch").click(function () {
+            ld(true);
+            $(this).prop("disabled", false)
+            ShowHideButtonFrm(false);
+            var url = '@Url.Action("Info")';
+            var js = form_to_json("myform", "frmfilter");
+            url += "?searchprm=" + JSON.stringify(js);
+         
+
+            $("#EmpDisplay").load(url + "&ajax=1&dt=" + Math.random(), function (responseTxt, statusTxt, xhr) {
+                if (statusTxt == "success") {
+                    //  DefaultBindtable();
+                    //LoadForm("MySiteMap");
+                    ld(false);
+                    ShowHideButtonFrm(true);
+                  //  $(this).prop("disabled", true);
+                }
+            });
+            //    AddColumn();
+            //  TableReportShow("dtbTMSmployeeWeekly");
+        });
+    });
+    function ChangeColor(ob) {
+        
+        var oSettings = ob.fnSettings();
+        
+        var columnsList = oSettings.aoColumns;
+        var startPeriod = $("#startPeriod").val().split('/');
+        var StardperDate = new Date(startPeriod[2], startPeriod[1], startPeriod[0]);
+        
+        var EndPeriod = $("#EndPeriod").val().split('/');;
+        var EndPeriodDate = new Date(EndPeriod[2], EndPeriod[1], EndPeriod[0]);
+        var colDate;
+        var dateString;
+        for (i = 0; i < columnsList.length; i++) {
+            // $("#log").append(JSON.stringify(columnsList[i]));
+            var colNameDataTable = columnsList[i].sTitle;
+            //alert(colNameDataTable);
+            var ColumName = columnsList[i].sTitle;
+            if (ColumName != "Raw") {
+                dateString = ColumName.split('/');
+                if (dateString.length > 0) {
+                    colDate = new Date(dateString[2], dateString[0], dateString[1]);
+                    
+                    if (StardperDate > colDate || colDate > EndPeriodDate) {
+                      //  oSettings.aoColumns[i].nTh.className = "outOfDate";
+                        $(ob).find("td:nth-child(" + (i + 1) + ")").addClass("outOfDate");
+                    } else {
+                        if (i == 7 || i == 6) {
+                            //this way I change exactly the clicked column
+                            oSettings.aoColumns[i].nTh.className = "Headweekend";
+                            $(ob).find("td:nth-child(" + (i + 1) + ")").addClass("Colweekend");
+                        }
+                    }
+                }
+            }
+        }
+    }
+    function AddColumn(sw, ew, arr) {
+        var ColumnColectionDefault = [];
+        var ColumnColection = [];
+        ColumnColection = ColumnColectionDefault;
+        var from = $("#" + sw).val().split('/');
+        var to = $("#" + ew).val().split('/');
+        var fromdate = new Date(from[2] + "-" + from[1] + "-" + from[0]);
+        var todate = new Date(to[2] + "-" + to[1] + "-" + to[0]);
+
+        if (todate > fromdate) {
+            while (todate >= fromdate) {
+                ColumnColection.push({ 'name': MDYFormatDateReport(fromdate, false), 'type': 'string' })
+                fromdate.setDate(fromdate.getDate() + 1);
+            }
+        } else {
+            ColumnColection.push({ 'name': MDYFormatDateReport(fromdate, false), 'type': 'string' })
+        }
+        var str = "[";
+        $.each(ColumnColection, function (i, value) {
+            str += "{'name':'" + ColumnColection[i].name + "','type':'" + ColumnColection[i].type + "'}";
+            //str += "'" + ColumnColection[i] + "'";
+
+            if (i < ColumnColection.length - 1) {
+                str += ",";
+            }
+        })
+        str += ",{'name':'Accumulate'}]";
+        $("#" + arr).val(str);
+    }
+    function LoadNextWeek(ew, edw, prml, nb) {
+        var from = $("#" + ew).val().split('/');
+        var to = $("#" + edw).val().split('/');
+        var fromdate = new Date(from[2] + "-" + from[1] + "-" + from[0]);
+        var todate = new Date(to[2] + "-" + to[1] + "-" + to[0]);
+        var ePdate = $("#ToDate_" + nb).val();
+        var sPdate = $("#FromDate_" + nb).val();
+        $("#EndPeriod").val(ePdate);
+        $("#startPeriod").val(sPdate);
+        var currentDate = new Date()
+        if (todate - fromdate >= 0 && currentDate - fromdate > 0) {
+            var url = '@Url.Action("NextWeek")';
+            var js = form_to_json("myform", "frmfilter");
+            url += "?searchprm=" + prml;
+
+            $("#tblweek_" + nb).load(url + "&ajax=1&dt=" + Math.random(), function (responseTxt, statusTxt, xhr) {
+                if (statusTxt == "success") {
+                
+                }
+            });
+        }
+    }
+   
+</script>

@@ -1,0 +1,172 @@
+@using Biz.TMS.Models
+@using Biz.OG.Services;
+@{
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+    ViewBag.Title = "TMS - Employee Working Summary";
+
+}
+@using (Ajax.BeginForm("T_CMS_Master_ContractEvt", "Report",
+                                                                            new AjaxOptions
+                                                                            {
+                                                                                InsertionMode = InsertionMode.Replace,
+                                                                                HttpMethod = "POST",
+                                                                                UpdateTargetId = "T_CMS_Master_Contractlists",
+                                                                                OnBegin = "onBegin",
+                                                                                OnSuccess = "PrintPdf",
+                                                                                OnComplete = "onComplete",
+                                                                            }, new { @class = "form-horizontal", enctype = "multipart/form-data", id = "myform" }))
+
+{
+
+    <section>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">@L("TMS - Employee Working Summary")</h4>
+                        <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                        @*<div class="heading-elements">
+                                <ul class="list-inline mb-0">
+                                    <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                    <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                    <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                    <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                </ul>
+                            </div>*@
+                    </div>
+                    <div class="card-body collapse in">
+
+                        <div class="card-block card-dashboard">
+                            <div class="dt-events-log">
+
+                            </div>
+                            <div class="panel" id="list-panel">
+                                <div class="panel-body">
+                                    <div class="pull-right">
+                                        <a href='@Url.Action("ExportExcel")' class="btn btn-info" title='@L("ExportToExcel")' id="btnExportExcel">
+                                            <i class="fa fa-download"></i>
+                                        </a>
+
+                                    </div>
+
+                                    <button type="button" class="btn btn-info   refresh-button refresh-btn"><span class="ft-rotate-cw" aria-hidden="true"></span></button>
+                                    <div class="filter" id="frmFilter" name="frmFilter">
+                                        <hr />
+                                        <h4 class="form-section"><i class="fa fa-filter"></i> TMS Filter</h4>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label class="col-sm-2 control-label">@L("Entity")</label>
+                                                <div class="col-sm-4">
+                                                    @Html.DropDownList("EntityId",
+                                new SelectList(T_COM_Master_EntityManager.GetAllByEmployeeCode(CurrentUser.EmployeeCode), "EntityId", "ShortName_EN"), @L("-- All--"),
+                                new { @class = "form-control  select-control frmfilter", @id = "EntityId" })
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="col-sm-2 control-label">@L("Date")</label>
+                                                    <div class="col-sm-10">
+                                                        <div class="col-sm-12 input-daterange input-group" id="datepicker">
+                                                            <input type="datetime" class="form-control  frmfilter" value='@SystemConfig.CurrentDate.ToString("dd/MM/yyyy")' id="fromdate" name="FromDate" />
+                                                            <span class="input-group-addon">to</span>
+                                                            <input type="datetime" class="form-control  frmfilter" id="todate" value='@SystemConfig.CurrentDate.ToString("dd/MM/yyyy")' name="ToDate" />
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <button class="btn btn-info" id="btnSearch" data-url='@Url.Action("GetEmpTMS", "Report")' data-query="EmployeCD,fromdate,todate" data-targetid="tbListEmploy" type="button">
+                                                        <i class="fa fa-search"></i>
+                                                        @L("Search")
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr />
+                                    <div>
+                                        <div class="tbctx" id="tbListEmploy">
+                                            <table id="dtbProvider" class="table table-striped table-bordered" data-url='@Url.Action("GetEmpTMS", "Report")'
+                                                   arr-id="Providerarr" key="EmployeeNo" default-search="" allow-search="1" allow-sort="0" allow-chk="0" allow-Expand="0" link-Expand="" style="width:100%"
+                                                   search-advanced="EmployeeNo"></table>
+                                            <input type='hidden' value="['CustomerName', 'ProviderName', 'CuryWinlossAmt', 'CuryPaymentAmt', 'TranDate']" id='Providerarr' />
+                                            <input type='hidden' value="" id='dtbProviderTotalRecord' />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+}
+<script language="javascript">
+
+    $(document).ready(function () {
+        var url = '@Url.Action("GetEmpTMS")';
+        var js = form_to_json("myform", "frmfilter");
+        url += "?searchprm=" + JSON.stringify(js);
+        $("#dtbProvider").attr("data-url", url);
+        AddColumn();
+        TableReportShow("dtbProvider");
+        $('.input-daterange').datepicker({
+            keyboardNavigation: false,
+            forceParse: false,
+            autoclose: true,
+            format: "dd/mm/yyyy",
+        });
+        $(".chosen-select").select2();
+        $("#btnSearch").click(function () {
+            var url = '@Url.Action("GetEmpTMS")';
+            var js = form_to_json("myform", "frmfilter");
+            url += "?searchprm=" + JSON.stringify(js);
+            $("#dtbProvider").attr("data-url", url);
+            $("#dtbProvider").DataTable().destroy();
+            $("#dtbProvider").html('');
+            AddColumn();
+            TableReportShow("dtbProvider");
+        })
+
+        $("#btnExportExcel").click(function () {
+            var url = '@Url.Action("TMSEmployeeExportExcel","Report")';
+            var js = form_to_json("myform", "frmfilter");
+            url += "?searchprm=" + JSON.stringify(js) + "&PageSize=" + $("#dtbProviderTotalRecord").val();
+            //  url += "?CustomerID=" + $("#CustomerID").val() + "&ProviderID=" + $("#ProviderID").val() + "&fromdate=" + $("#fromdate").val() + "&todate=" + $("#todate").val() + "&PageSize=" + $("#dtbProviderTotalRecord").val();
+            $(this).attr("href", url);
+            return true;
+        })
+    });
+    function AddColumn() {
+        var ColumnColectionDefault = [{ 'name': 'EmployeeName', 'type': 'string' }, { 'name': 'DeptName', 'type': 'string' },
+                 { 'name': 'JoinedDate', 'type': 'dateY' }, { 'name': 'TerminationDate', 'type': 'dateY' }];
+        var ColumnColection = [];
+        ColumnColection = ColumnColectionDefault;
+        var from = $("#fromdate").val().split('/')
+        var to = $("#todate").val().split('/')
+        var fromdate = new Date(from[2] + "-" + from[1] + "-" + from[0]);
+        var todate = new Date(to[2] + "-" + to[1] + "-" + to[0]);
+        if (todate > fromdate) {
+            while (todate >= fromdate) {
+                ColumnColection.push({ 'name': FormatDateReport(fromdate, false), 'type': 'string' })
+                fromdate.setDate(fromdate.getDate() + 1);
+            }
+        } else {
+            ColumnColection.push({ 'name': FormatDateReport(fromdate, false), 'type': 'string' })
+        }
+        var str = "[";
+        $.each(ColumnColection, function (i, value) {
+            str += "{'name':'" + ColumnColection[i].name + "','type':'" + ColumnColection[i].type + "'}";
+            //str += "'" + ColumnColection[i] + "'";
+
+            if (i < ColumnColection.length - 1) {
+                str += ",";
+            }
+        })
+        str += "]";
+        $("#Providerarr").val(str);
+    }
+</script>

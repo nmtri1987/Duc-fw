@@ -1,0 +1,11 @@
+@{
+    ViewBag.Title = L("LocaleStringResource");
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+<div id="LocaleStringResourcelist">
+    @Html.Action("List")
+</div>

@@ -1,0 +1,366 @@
+﻿/*body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}*/
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+  /*  max-width: 280px;*/
+}
+/*.table thead{
+    
+    background-color:#1c84c6;
+    background-repeat: repeat-x;
+    border-color: #245580;
+    color:white;
+    
+}
+.table thead th{
+    text-align:center;
+}*/
+.impval{
+    font-weight:bolder;
+    color:red;
+}
+
+.progressBarLoad {
+    display: none;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+/*.form-control,
+.single-line {
+    background-color: #FFFFFF;
+    background-image: none;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+    font-size: 14px;
+}
+
+    .form-control:focus,
+    .single-line:focus {
+        border-color: #1ab394 !important;
+    }
+    .form-control, .single-line {
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    font-size: 14px;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+}*/
+.input-group-addon {
+    background-color: #1c84c6;
+    color:#ffffff;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    color: inherit;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    padding: 6px 12px;
+    text-align: center;
+}
+    /*.header-navbar .navbar-container {
+    background: inherit;
+    height: 4rem;
+    padding: 0 18px;
+    transition: all 0.3s ease 0s;
+}
+
+
+    .bg-primary {
+    background-color: #00b5b8 !important;
+}
+.vertical-overlay-menu.menu-open .main-menu {
+    opacity: 1;
+    transform: translate3d(240px, 0px, 0px);
+    transition: width 0.25s ease 0s, opacity 0.25s ease 0s, transform 0.25s ease 0s, -webkit-transform 0.25s ease 0s, -moz-transform 0.25s ease 0s, -o-transform 0.25s ease 0s;
+}
+
+.vertical-overlay-menu .main-menu, .vertical-overlay-menu.menu-hide .main-menu {
+    left: -240px;
+    opacity: 0;
+    transform: translate3d(0px, 0px, 0px);
+    transition: width 0.25s ease 0s, opacity 0.25s ease 0s, transform 0.25s ease 0s, -webkit-transform 0.25s ease 0s, -moz-transform 0.25s ease 0s, -o-transform 0.25s ease 0s;
+    width: 240px;
+}
+
+.vertical-overlay-menu .navbar.navbar-brand-center .navbar-header {
+    float: left;
+    width: auto;
+}
+.header-navbar.navbar-brand-center .navbar-header {
+    left: 50%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    transform: translate(-50%, 0px);
+    width: 150px;
+}
+.navbar-brand {
+    float: left;
+    font-size: 1.25rem;
+    line-height: inherit;
+    margin-right: 1rem;
+    padding-bottom: 0.25rem;
+    padding-top: 0.25rem;
+}
+.header-navbar .navbar-container {
+    background: inherit;
+    height: 4rem;
+    padding: 0 18px;
+    transition: all 0.3s ease 0s;
+}
+.navbar-nav .nav-item {
+    float: left;
+}
+.header-navbar .navbar-container {
+    background: inherit;
+    height: 4rem;
+    padding: 0 18px;
+    transition: all 0.3s ease 0s;
+}
+.float-xs-right {
+    float: right !important;
+}
+.hidden-md-up {
+    display: none !important;
+}
+
+.navbar-brand {
+    float: left;
+    font-size: 1.25rem;
+    line-height: inherit  !important;
+    margin-right: 1rem  !important;
+    padding-bottom: 0.25rem  !important;
+    padding-top: 0.25rem  !important;
+}
+.header-navbar .navbar-header .navbar-brand .brand-logo {
+    vertical-align: sub;
+    display:inline;
+}
+.header-navbar .navbar-header .navbar-brand .brand-text {
+    display: inline;
+    font-weight: 500;
+    letter-spacing: 1px;
+    padding-left: 10px;
+}
+.bg-success{
+     background-color: #1c84c6 !important;
+    border-color: #1c84c6 !important;
+    color: #ffffff !important;
+}
+
+.navbar-nav .mega-dropdown-menu, .navigation-main .mega-dropdown-menu {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-family: "Open Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    margin: 0 25px;
+    padding: 0.5rem 0;
+    width: calc(100% - 50px);
+    z-index: 9999;
+}
+.open > .dropdown-menu {
+    opacity: 1;
+    transform: scale(1, 1);
+}
+.dropdown .dropdown-menu {
+    animation-fill-mode: forwards;
+    border: 1px solid #e6e6e6;
+    border-radius: 0 0 0.25rem 0.25rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: block;
+    min-width: 160px;
+    opacity: 0.3;
+    transform: scale(1, 0);
+    transform-origin: center top 0;
+    transition: all 0.2s linear 0s;
+}
+.open > .dropdown-menu {
+    display: block;
+}
+.dropdown-menu {
+    background-clip: padding-box;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.25rem;
+    color: #404e67;
+    display: none;
+    font-size: 1rem;
+    left: 0;
+    list-style: outside none none;
+    margin: 2px 0 0;
+    min-width: 160px;
+    padding: 5px 0;
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    z-index: 1000;
+}
+.navbar-wrapper .navbar-nav a{
+    color:white;
+}
+.navbar-wrapper .nav .open > a,.navbar-wrapper .nav .open > a:hover ,.navbar-wrapper .nav .open > a:focus {
+    background: none;
+}
+.navbar-wrapper .nav a:hover{
+    background: none;
+}*/ 
+    .colfilter {
+    position: absolute;
+    max-width: 400px;
+    z-index: 99;
+    box-shadow: 1px 2px 2px 1px #a5a3a3;
+    right:20px;
+}
+.colfilter div.collist{
+    float:left;
+    width:33.33%;
+    font-size: 13px;
+    line-height: 125%;
+    font-weight:bolder;
+    cursor:pointer;
+
+}
+
+.hidetex{
+    -o-text-overflow: ellipsis;   /* Opera */
+    text-overflow:    ellipsis;   /* IE, Safari (WebKit) */
+    overflow:hidden;              /* don't show excess chars */
+    white-space:nowrap;           /* force single line */
+}
+.pull-right .navbar-top-links li a {
+    padding: 0px 10px;
+    min-height: 50px;
+    padding-top: 10px;
+}
+.colfilter .panel {
+    box-shadow:none;
+}
+.panel-select-custom > .panel-heading, .panel-select-custom > .panel-heading a {
+    color: #fff !important;
+    /*background: linear-gradient(to bottom, #337ab7 0%, #265a88 100%);*/
+    border-color: #ddd;
+}
+.colfilter .panel-heading{
+    padding:10px;
+    background:linear-gradient(to bottom, #337ab7 0%, #265a88 100%);
+}
+.colfilter {
+    background-color:white;
+}
+.colfilter .panel-body{
+    padding:10px;
+}
+.colfilter .Sitemapcol {
+    padding:10px;
+    
+}
+
+
+.dnh-typeahead {
+    width: 100%;
+}
+
+.typeahead, .tt-query, .tt-hint {
+    border: 2px solid #CCCCCC;
+    border-radius: 8px;
+    font-size: 22px; /* Set input font size */
+    height: 30px;
+    line-height: 30px;
+    outline: medium none;
+    padding: 8px 12px;
+    width: 100%;
+}
+
+.typeahead {
+    background-color: #FFFFFF;
+}
+
+    .typeahead:focus {
+        border: 2px solid #0097CF;
+    }
+
+.tt-query {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+
+.tt-hint {
+    color: #999999;
+}
+
+.tt-menu {
+    background-color: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    margin-top: 12px;
+    padding: 8px 0;
+    width: 100%;
+}
+
+.tt-suggestion {
+    font-size: 18px; /* Set suggestion dropdown font size */
+    padding: 3px 20px;
+}
+
+    .tt-suggestion:hover {
+        cursor: pointer;
+        background-color: #0097CF;
+        color: #FFFFFF;
+    }
+
+    .tt-suggestion p {
+        margin: 0;
+    }
+
+.dnhsite {
+    padding: 5px;
+    text-decoration: none;
+    display: none;
+}
+
+    .dnhsite a {
+        display: block;
+        font-weight: 500;
+        padding: 10px 10px 5px 15px;
+    }
+
+        .dnhsite a:hover {
+            color: #1b2942;
+             border-bottom: 2px solid #00b5b8;
+        }
+
+.active {
+    display: block;
+}
+ 
+.page-item {
+    display: inline;
+    float: left;
+}

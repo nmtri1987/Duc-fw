@@ -1,0 +1,85 @@
+﻿@using Biz.CS.Services
+@using Biz.CS.Models
+<div data-scroll-to-active="true" class="main-menu menu-fixed menu-light menu-accordion menu-shadow">
+    <!-- main menu header-->
+    @*<div class="main-menu-header" style="display: block;">
+            <input placeholder="Search" class="menu-search form-control round" type="text">
+        </div>*@
+    <!-- / main menu header-->
+    <!-- main menu content-->
+    <div class="main-menu-content ps-container ps-theme-dark ps-active-y" data-ps-id="8af9c33f-6b04-ec60-d54d-661b26cdc8c8" style="height: 362px;">
+        <div id="panelL" class="menuFarme">
+            <div class="menuFrameI">
+
+                <div id="panelL_menuPanel_subModulesBar" class="toolBarSubMod">
+
+                    <ul id="panelL_menuPanel_subModulesBar" class="toolsList asTable">
+                        @{
+                            Biz.Core.Models.DNHSiteMapCollection objSiteMaps = new Biz.Core.Models.DNHSiteMap().GetNodeByLevel(CurrentUser, 0);
+                            Biz.Core.Models.DNHSiteMap objSMap;
+
+
+                            string css = "";
+                            //string first = "DNHDefault DNHRemove";
+                            string first = "DNHRemove";
+                            Guid ParentID = Guid.Empty;
+                            Guid FirstParntID = Guid.Empty;
+                            for (int i = 0; i < objSiteMaps.Count; i++)
+                            {
+                                objSMap = objSiteMaps[i];
+                                css = "toolSubModNormal dnhtabmenu";
+                                if (ParentID != objSMap.ParentID)
+                                {
+                                    css = "toolSubModPushed dnhtabmenu";
+                                }
+
+
+
+                                <li nodeid="@objSMap.NodeID" parent-node="@objSMap.ParentID" style="display:none" target-id="seccond_menu" class="@first">
+                                    <div class="toolsBtn" startgroup="1" data-cmd="d6fbfafb-a678-47d7-8b55-1860f79d5d40|9c5b881e-c3ca-47b3-bf8b-5389fa130aea" tooltip="Work Area" pushed="1">
+                                        <div class="@css" data-type="button">
+                                            <div class="sprite-icon main-icon" icon="DataEntryF">
+                                                <div class="fa @objSMap.IconImage ">
+                                                    @L(objSMap.Title)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                ParentID = objSMap.ParentID;
+                                if (i == 0)
+                                {
+                                    FirstParntID = ParentID;
+                                    first = "";
+                                }
+                            }
+                        }
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="seccond_menu" link='~/SiteMap/SecondMenu?NodeID=@FirstParntID' data-menu="menu-navigation" class="navigation navigation-main">
+
+        </div>
+        @*<ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
+                <li class="navigation-header">
+                    <span>General @objSiteMaps.Count</span><i data-toggle="tooltip" data-placement="right" data-original-title="General" class="ft-minus"></i>
+                </li>
+                <li class="nav-item">
+                    <a href="#"><i class="ft-home"></i><span data-i18n="nav.dash.main" class="menu-title">Dashboard</span><span class="tag tag tag-primary tag-pill float-xs-right mr-2">5</span></a>
+                </li>
+                <li class="nav-item">
+
+                </li>
+
+
+
+            </ul>*@
+        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 3px; height: 811px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div></div><div class="ps-scrollbar-x-rail" style="left: 0px; bottom: -42px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 45px; right: 0px; height: 362px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 18px; height: 152px;"></div></div>
+    </div>
+    <!-- /main menu content-->
+    <!-- main menu footer-->
+    <!-- main menu footer-->
+</div>

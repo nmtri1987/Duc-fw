@@ -1,0 +1,92 @@
+﻿@using Biz.CS.Models
+@model DNHUserInRoles
+@{
+    ViewBag.Title = "DNHUserInRoles";
+}
+@using (Ajax.BeginForm("Save", "UserInRoles",
+                new AjaxOptions
+                {
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "POST",
+                    UpdateTargetId = "UserInRolesList",
+                    LoadingElementId = "loadingDisplay",
+                    OnSuccess = "closePopup()",
+                    OnBegin = "onBegin",
+                    OnComplete = "onComplete",
+                }, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(m => m.CompanyID)
+
+    @Html.HiddenFor(m => m.CreatedUser)
+
+
+
+    <style type="text/css">
+        .bs-example {
+            font-family: sans-serif;
+            position: relative;
+            margin: 100px;
+        }
+    </style>
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title" id="from-actions-bottom-right"> @L("DNHUserInRoles")</h4>
+            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+            <div class="heading-elements">
+                <ul class="list-inline mb-0">
+                    <li><a data-action="close"><i class="ft-x"></i></a></li>
+                </ul>
+            </div>
+            <div class="card-body collapse in">
+                <div class="card-block">
+                    <div class="form-body">
+                        @*@Html.EditorFor(model => model.UserID, "Search")*@
+                        @Html.EditorFor(model => model.UserID, "Search", new { @class = "dnhsearch", @placeholder = L("UserID"), @TargetController = "DNHUsers", @FieldMapping = "Id" })
+                        @*@Html.EditorFor(model => model.UserID, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("UserID")} })*@
+                        @*@Html.EditorFor(model => model.RoleName, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })*@
+                        @Html.EditorFor(model => model.RoleName, "Search", new { @class = "dnhsearch", @placeholder = L("RoleName"), @TargetController = "DNHRoles", @FieldMapping = "Rolename" })
+                        @Html.EditorFor(model => model.ApplicationName, new { htmlAttributes = new { @class = "form-control ", @placeholder = L("ApplicationName") } })
+                        @*@Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control ", @placeholder = L("UserName") } })*@
+                        @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control ", @placeholder = L("IsActive") } })
+                        @Html.EditorFor(model => model.CreatedDate)
+                    </div>
+                    <div class="form-actions right"> <button type="submit" class="btn btn-primary btn-block" name="btnsave" value="save">@L("SaveChange")</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@Scripts.Render("~/bundles/jqueryval")
+
+@*<script>
+    var bestPictures = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        // prefetch: 'post.json',https://twitter.github.io/typeahead.js/examples/
+        remote: {
+            url: 'DNHUsers/Search/value=%QUERY',
+            wildcard: '%QUERY'
+        }
+    });
+        $(document).ready(function () {
+            $('#UserID').typeahead(null, {
+                name: 'best-pictures',
+                display: 'Id',
+                source: bestPictures,
+                templates: {
+                    empty: [
+                      '<div class="empty-message">',
+                        'unable to find any Best Picture winners that match the current query',
+                      '</div>'
+                    ].join('\n'),
+                    suggestion: Handlebars.compile('<div><strong>{{UserName}}</strong> � {{Id}}</div>')
+                }
+            });
+
+        });
+
+</script>*@

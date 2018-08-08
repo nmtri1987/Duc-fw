@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9CBA3062-BEAE-4759-874F-4B53DE81CA1D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RBVH.HR</RootNamespace>
+    <AssemblyName>RBVH.HR</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\03- Lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\03- Lib\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Const\HRConfig.cs" />
+    <Compile Include="Const\ModuleConfig.cs" />
+    <Compile Include="Controllers\HR\TimeLogController.cs" />
+    <Compile Include="Controllers\HR\T_CMS_Master_ContractController.cs" />
+    <Compile Include="Controllers\HR\T_CMS_Master_EmploymentSubTypeController.cs" />
+    <Compile Include="Controllers\HR\T_CMS_Master_EmploymentTypeController.cs" />
+    <Compile Include="Controllers\HR\T_CMS_Master_InternshipController.cs" />
+    <Compile Include="Controllers\HR\T_CMS_Master_WorkHoursController.cs" />
+    <Compile Include="Controllers\HR\T_CMS_Static_ContractTermController.cs" />
+    <Compile Include="Controllers\HR\T_CMS_Static_PeriodOfProbationController.cs" />
+    <Compile Include="Controllers\HR\T_COM_Master_DegreeController.cs" />
+    <Compile Include="Controllers\HR\T_COM_Master_EmployeeController.cs" />
+    <Compile Include="Controllers\HR\T_COM_Master_EntityController.cs" />
+    <Compile Include="Controllers\HR\T_COM_Master_GradeController.cs" />
+    <Compile Include="Controllers\HR\T_COM_Master_LocationController.cs" />
+    <Compile Include="Controllers\HR\T_COM_Master_PlaceOfIssueController.cs" />
+    <Compile Include="Controllers\HR\T_COM_Master_UniversityController.cs" />
+    <Compile Include="Controllers\HR\T_LMS_Master_AnnualLeaveController.cs" />
+    <Compile Include="Controllers\HR\T_LMS_Trans_LeaveStoryController.cs" />
+    <Compile Include="Controllers\ls_PayrollDOWS_RBVHController.cs" />
+    <Compile Include="Controllers\Report\ReportController.cs" />
+    <Compile Include="Controllers\TMS\hrm_atd_ScanTimeController.cs" />
+    <Compile Include="Controllers\TMS\TMSMissingScanTimeController.cs" />
+    <Compile Include="Controllers\TMS\T_TMS_EmployeeDailyTimesheetTransactionController.cs" />
+    <Compile Include="Controllers\TMS\T_TMS_EmployeeTimesheetWeeklyDetails.cs" />
+    <Compile Include="Controllers\T_COM_Master_Employee_PositionController.cs" />
+    <Compile Include="Models\TMS\hrm_atd_ScanTime.cs" />
+    <Compile Include="Models\Report\MissingScanTime.cs" />
+    <Compile Include="Models\TMS\ls_PayrollDOWS_RBVH.cs" />
+    <Compile Include="Models\TMS\REmployee.cs" />
+    <Compile Include="Models\TMS\TMSMissingScanTime.cs" />
+    <Compile Include="Models\TMS\T_TMS_EmployeeDailyTimesheetTransaction.cs" />
+    <Compile Include="Models\TMS\T_TMS_EmployeeTimesheetWeeklyDetails.cs" />
+    <Compile Include="Models\T_COM_Master_University.cs" />
+    <Compile Include="Models\T_LMS_Trans_LeaveStory.cs" />
+    <Compile Include="Models\T_COM_Master_Employee_Position.cs" />
+    <Compile Include="Models\ls_PayrollDOWS_RBVH.cs" />
+    <Compile Include="Controllers\T_COm_Master_OrgController.cs" />
+    <Compile Include="Models\T_CMS_Master_EmploymentSubType.cs" />
+    <Compile Include="Models\T_CMS_Master_EmploymentType.cs" />
+    <Compile Include="Models\T_CMS_Master_Internship.cs" />
+    <Compile Include="Models\T_CMS_Master_WorkHours.cs" />
+    <Compile Include="Models\T_CMS_Static_ContractTerm.cs" />
+    <Compile Include="Models\T_CMS_Static_PeriodOfProbation.cs" />
+    <Compile Include="Models\T_COM_Master_Degree.cs" />
+    <Compile Include="Models\T_COM_Master_Employee.cs" />
+    <Compile Include="Models\T_COM_Master_Entity.cs" />
+    <Compile Include="Models\T_COM_Master_Location.cs" />
+    <Compile Include="Controllers\HR\T_COM_Master_PositionController.cs" />
+    <Compile Include="Controllers\T_CMS_InterfaceLacviet_WorkingHoursController.cs" />
+    <Compile Include="Controllers\T_CMS_Master_SalutationController.cs" />
+    <Compile Include="Models\TimeLog.cs" />
+    <Compile Include="Models\T_CMS_InterfaceLacviet_WorkingHours.cs" />
+    <Compile Include="Models\T_CMS_Master_Contract.cs" />
+    <Compile Include="Models\T_CMS_Master_Salutation.cs" />
+    <Compile Include="Models\T_COM_Master_Grade.cs" />
+    <Compile Include="Models\T_COm_Master_Org.cs" />
+    <Compile Include="Models\T_COM_Master_PlaceOfIssue.cs" />
+    <Compile Include="Models\T_COM_Master_Position.cs" />
+    <Compile Include="Models\T_LMS_Master_AnnualLeave.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\DTP.Core\DTP.Core.csproj">
+      <Project>{9d270e78-1e44-49b2-89af-3bbd6e1fe8c0}</Project>
+      <Name>DTP.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\DTP.Data\DTP.Data.csproj">
+      <Project>{04689cff-c530-469e-90ac-5a716440f90a}</Project>
+      <Name>DTP.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DataBase\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

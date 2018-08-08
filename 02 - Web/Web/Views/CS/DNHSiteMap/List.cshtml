@@ -1,0 +1,129 @@
+@{
+    ViewBag.Title = "SiteMap";
+  
+}
+<div class="content-header row">
+    <div class="content-header-left col-md-6 col-xs-12 mb-2">
+        <h3 class="content-header-title mb-0">@L("SiteMap")</h3>
+        <div class="row breadcrumbs-top">
+            <div class="breadcrumb-wrapper col-xs-12">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="#">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a href="#">@L("SiteMap")</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    @*<div class="content-header-right text-md-right col-md-6 col-xs-12">
+            <div class="btn-group">
+                <button type="button" class="btn btn-round btn-primary"><i class="ft-cog pr-1"></i> Settings</button>
+                <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-round btn-primary dropdown-toggle"><span class="sr-only">Toggle Dropdown</span></button>
+                <div class="dropdown-menu">
+                    <a href="#" class="dropdown-item">Action</a><a href="#" class="dropdown-item">Another action</a><a href="#" class="dropdown-item">Something else here</a>
+                    <div class="dropdown-divider"></div><a href="#" class="dropdown-item">Separated link</a>
+                </div>
+            </div>
+        </div>*@
+</div>
+
+
+	 
+
+    <link href='@Url.Content("~/Scripts/js/jstree/themes/default/style.css")' rel="stylesheet" />
+    <div class="row">
+        <div class="col-xl-4 col-lg-12">
+
+            <div class="card">
+
+                <div class="card-body collapse in">
+
+                    <div class="card-block">
+                        <div class="form-actions">
+                            <div class="text-xs-left">
+                                @*<button type="submit" class="btn btn-primary"><i class="ft-thumbs-up position-right"></i></button>*@
+                                <button type="reset" class="btn btn-warning" id="btnReset"><i class="ft-refresh-cw position-right"></i></button>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="body-content DNHDefault" target-id="MySiteMap">
+                            <div id="siteMap_tree"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="col-xl-8 col-lg-12"  >
+            <div id="MySiteMap" link='~/SiteMap/Info'></div>
+        </div>
+
+    </div>
+    <script src="@Url.Content("~/Scripts/js/jstree/jstree.min.js")" type="text/javascript"></script>
+    <script language="javascript">
+    //Load tree page
+        var url = $("#MySiteMap").attr("link");
+    $('#siteMap_tree').jstree({
+        'core': {
+            'data': getDataSiteMap()
+        }
+    }).bind("select_node.jstree", function (e, data) {
+        //Toggle on the click of that Node's name
+        //alert(data.node.id);
+        
+        $("#MySiteMap").load(url + "?NodeID=" + data.node.id + "&ajax=1&dt=" + Math.random(), function (responseTxt, statusTxt, xhr) {
+            if (statusTxt == "success") {
+                DefaultBindtable();
+                //LoadForm("MySiteMap");
+            }
+        });
+    });
+    $(document).ready(function () {
+
+        $('#btnReset').click(function (e) {
+            e.preventDefault();
+            $('#siteMap_tree').jstree({
+                'core': {
+                    'data': getDataSiteMap()
+                }
+            })
+        });
+        //$('.modal').appendTo("body");
+    });
+
+    function getAllSiteMap() {
+        var result = AjaxGetData("/sitemap/SiteGetAllPage");
+        return result;
+    }
+
+    function getDataSiteMap() {
+        var data = [];
+        var result = getAllSiteMap();
+
+        var objdefault = new Object();
+        objdefault.id = "00000000-0000-0000-0000-000000000000";
+        objdefault.parent = "#";
+        objdefault.text = "Company";
+        objdefault.state = {
+            'opened': true,
+            'selected': true
+        }
+        data.push(objdefault);
+        $.each(result, function (key, value) {
+            var obj = new Object();
+            if ($.isEmptyObject(result[key].ParentID)) {
+                result[key].ParentID = "00000000-0000-0000-0000-000000000000";
+            }
+            obj.id = result[key].NodeID;
+            obj.parent = result[key].ParentID;
+            obj.text = result[key].Title;
+            data.push(obj);
+        })
+        return data;
+    }
+ 
+    </script>

@@ -1,0 +1,16 @@
+@using Biz.TMS.Models
+@model ls_PayrollDOWS_RBVHCollection
+@{
+    ViewBag.Title = "ls_PayrollDOWS_RBVH";
+  
+}
+@using (Ajax.BeginForm("ls_PayrollDOWS_RBVHEvt", "ls_PayrollDOWS_RBVH", 
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+        UpdateTargetId ="ls_PayrollDOWS_RBVHlist",
+        OnBegin = "onBegin", 
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+	<div class="DNHtable" target_table="ls_PayrollDOWS_RBVH" PageName='@L("ls_PayrollDOWS_RBVH")'></div>
+}

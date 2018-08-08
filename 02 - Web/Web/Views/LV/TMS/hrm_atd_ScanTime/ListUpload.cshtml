@@ -1,0 +1,60 @@
+@{
+    ViewBag.Title = "hrm_atd_ScanTime Import";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Ajax.BeginForm("hrm_atd_ScanTimeEvt", "hrm_atd_ScanTime",
+                                        new AjaxOptions
+                                        {
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "hrm_atd_ScanTimelist",
+                                            OnBegin = "onBegin",
+                                            OnComplete = "onComplete",
+                                        }, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    
+    <div class="ibox-title">
+        <div class="panel-heading">
+          
+        </div>
+    </div>
+    <div class="ibox-content">
+
+        <div class="m-b-lg">
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">@L("SelectFile")</label>
+                <div class="col-sm-10">
+                    <input type="file" id="importhrm_atd_ScanTimeexcelfile" targetid="#prehrm_atd_ScanTime" name="importhrm_atd_ScanTimeexcelfile" class="fileupload" style="display:none;"
+                           link="/hrm_atd_ScanTime/ImportExcelFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                    <button class="btn btn-primary SelectFile" type="button" targetid="importhrm_atd_ScanTimeexcelfile">@L("SelectFile")</button>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary list-panel" id="list-panel">
+                    <div class="panel-heading list-panel-heading" style="height:44px;">
+                        <h3 class="panel-title list-panel-title">@L("hrm_atd_ScanTime")</h3>
+                    </div>
+                    <div class="panel-body">
+                        <button id="btnhrm_atd_ScanTimeSave" type="button" class="btn btn-primary btn-sm" link="/hrm_atd_ScanTime/SaveExcel"><span class="fa fa-save" aria-hidden="true"></span></button>
+                        <button type="button" class="btn btn-default btn-sm refresh-button"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+                        <hr />
+                        <div class="table-responsive">
+                            <table id="prehrm_atd_ScanTime" class="table table-striped table-bordered" data-url='@Url.Action("GetGata", "hrm_atd_ScanTime")' savebtn="btnhrm_atd_ScanTimeSave"
+                                   arrid="hrm_atd_ScanTimearr" key="ID" default-search="" allow-search="1" allow-chk="1" style="width:100%"></table>
+                            <input type='hidden' value="['Scan_Time','Bar_Code','Reader_ID','Manual_Input','In1Out0','Work_Date','Is_Over','EmployeeID','RecordStatus','Is_OverF','ID','Shift_ID','valid','RootScan','ScanTimeIn_Edit','CreateDate','IsCopy',]" id='hrm_atd_ScanTimearr' />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+    <script src="~/Scripts/model/fnIfind.js"></script>
+            
+}

@@ -1,0 +1,65 @@
+@using Biz.TMS.Models
+@model T_TMS_EmployeeTimesheetWeeklyDetails
+@{
+    ViewBag.Title = "T_TMS_EmployeeTimesheetWeeklyDetails";
+}
+@using (Ajax.BeginForm("Create", "T_TMS_EmployeeTimesheetWeeklyDetails", 
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+		UpdateTargetId ="T_TMS_EmployeeTimesheetWeeklyDetailslist",
+        LoadingElementId ="loadingDisplay",
+        OnSuccess ="closePopup()",
+        OnBegin = "onBegin", 
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+                    @Html.ValidationSummary(true)
+					 @Html.HiddenFor(m => m.IDCD)
+					  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+				<div class="card">
+					 <div class="card-header">
+						<h4 class="card-title" id="from-actions-bottom-right"> @L("T_TMS_EmployeeTimesheetWeeklyDetails")</h4>
+						<a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+        				<div class="heading-elements">
+		                    <ul class="list-inline mb-0">
+	                        <li><a data-action="close"><i class="ft-x"></i></a></li>
+	                    </ul>
+	                </div>
+					<div class="card-body collapse in">
+						<div class="card-block">
+						<div class="form-body"> @Html.EditorFor(model => model.CompanyID, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("CompanyID")} })@Html.EditorFor(model => model.ID,"TextDisable", new { htmlAttributes = new { @class = "form-control {{cssclass}}", @placeholder=L("ID")} })@Html.EditorFor(model => model.EntityID, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("EntityID")} })@Html.EditorFor(model => model.WorkingTimeGroupID, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("WorkingTimeGroupID")} })@Html.EditorFor(model => model.WorkDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("WorkDate")} })@Html.EditorFor(model => model.DateName, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("DateName")} })@Html.EditorFor(model => model.WeekNo, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("WeekNo")} })@Html.EditorFor(model => model.YearNo, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("YearNo")} })@Html.EditorFor(model => model.FinPeriod, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("FinPeriod")} })@Html.EditorFor(model => model.EmployeeCode, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("EmployeeCode")} })@Html.EditorFor(model => model.EmployeeNo, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("EmployeeNo")} })@Html.EditorFor(model => model.DowID, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("DowID")} })@Html.EditorFor(model => model.In_Out, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("In_Out")} })@Html.EditorFor(model => model.StandardWorkedHour, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("StandardWorkedHour")} })@Html.EditorFor(model => model.WorkedHour, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("WorkedHour")} })@Html.EditorFor(model => model.ND, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ND")} })@Html.EditorFor(model => model.OT, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("OT")} })@Html.EditorFor(model => model.Leave, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("Leave")} })@Html.EditorFor(model => model.LC_UnNoReg, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("LC_UnNoReg")} })@Html.EditorFor(model => model.StatusID, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("StatusID")} })@Html.EditorFor(model => model.IsRelease, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("IsRelease")} })@Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("CreatedDate")} })@Html.EditorFor(model => model.CreateUser, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("CreateUser")} })@Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ModifiedDate")} })@Html.EditorFor(model => model.ModifiedUser, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ModifiedUser")} })</div>
+						<div class="form-actions right"> <button type="submit" class="btn btn-primary btn-block" name="btnsave" value="save">@L("SaveChange")</button></div>
+						</div>
+					</div>
+	            </div>
+					 </div>
+
+ }
+
+
+  @Scripts.Render("~/bundles/jqueryval")

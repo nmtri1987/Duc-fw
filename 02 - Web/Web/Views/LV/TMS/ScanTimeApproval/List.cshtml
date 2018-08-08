@@ -1,0 +1,160 @@
+﻿@using LV.TMS.Models
+@using Biz.OG.Services;
+@using LV.TMS.Models
+@model SearchParams
+
+@{
+    ViewBag.Title = "Approve timesheet";
+
+}
+@using (Ajax.BeginForm("ButtonSubmitEvent", "ApproveTimeSheet", new AjaxOptions
+{
+    InsertionMode = InsertionMode.Replace,
+    HttpMethod = "POST",
+    UpdateTargetId = "ApproveTimeSheet",
+    OnBegin = "onBegin",
+    OnComplete = "onComplete",
+},
+                                                            new
+                                                            {
+                                                                @class = "form-horizontal",
+                                                                enctype = "multipart/form-data",
+                                                                id = "myform"
+                                                            }))
+{
+    <section>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="filter" id="frmFilter" name="frmFilter">
+                        <hr />
+                        <h4 class="form-section"><i class="fa fa-filter"></i>  @L("Approve In/Out")</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-md-12 row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-3">
+                                            @Html.EditorFor(model => model.StartDate, new
+                                       {
+                                           htmlAttributes = new { @class = "form-control frmfilter col-md-offset-2", @placeholder = L("StartDate") }
+                                       })
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.EditorFor(model => model.EndDate, new
+                                       {
+                                           htmlAttributes = new { @class = "form-control frmfilter", @placeholder = L("EndDate") }
+                                       })
+                                        </div>
+                                        <div class="col-md-1">
+                                            <label class="control-label" for="EndDate">&nbsp;</label>
+                                            <button type="button" class="btn btn-primary full-width btnSearch" id="btnSearch"
+                                                    data-url="@Url.Action("FilterData", "ApproveTimeSheet")"
+                                                    data-query="showmissing,fromdate,todate"
+                                                    data-targetid="tbApproveTimeSheet">
+                                                @L("Search")
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 row">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-3">
+                                            <div class="row">
+                                                <label>Only show waiting for approval</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="checkbox" class="form-control frmfilter" checked name="ShowMissing" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="col-md-10">
+                            <button type="button" class="btn  btn-holiday">@L("Holiday")</button>
+                            <button type="button" class="btn btn-weekend">@L("Weekend")</button>
+                        </div>
+                        
+                        <div class="col-md-1">
+                            <button type="submit" class="btn btn-primary full-width" id="btnApprove"
+                                    value="approve" name="Event" data-url="#">
+                                @L("Approve")
+                            </button>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="submit" class="btn btn-danger full-width" id="btnReject"
+                                    value="reject" name="Event" data-url="#">
+                                @L("Reject")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="DNHtable customTMS" target_table="ApproveTimeSheet" PageName='@L("ApproveTimeSheet")' CusLink="GetData" disedit="1" np="objItem" fcol="0" ofn="CheckVisiable(this)"></div>
+<script type="text/javascript">
+    function selectRow(ob) {
+
+        var aray = $(ob).find("form").serializeArray();
+        console.log(aray)
+        var visIdx = $(ob).index();
+
+        var idx = table.row($(ob).parent()).index();
+        var rowData = table.rows(visIdx).data().toArray();
+        var row = $(ob).closest("tr").find("input.aprNote");
+        var Currenttd = $(ob).closest("td").find("input[type=hidden]");
+        var mySelectedData = eval($(Currenttd).val());
+        var allowEdit = mySelectedData[0].AllowEdit;
+        console.log(mySelectedData)
+
+        var isCheck = $(ob).is(':checked');
+        if (!isCheck) {
+            $(row).attr("readonly", true);
+        } else {
+
+            if (allowEdit == "True") {
+                $(row).attr("readonly", false);
+            } else {
+                //$("#btnSubmit").prop("disabled", true)
+            }
+        }
+        if (allowEdit != "True") {
+            $(ob).css('display', 'none');
+        }
+    }
+    //$("#btnSubmit").prop("disabled", true)
+    function CheckVisiable(ob) {
+        $(ob).find('input.selectcol').each(function () {
+            var Currenttd = $(this).closest("td").find("input[type=hidden]");
+            var mySelectedData = eval($(Currenttd).val());
+            var allowEdit = mySelectedData[0].AllowEdit;
+            var isWK = mySelectedData[0].isWK;
+            var IsHoliday = mySelectedData[0].isHLD;
+            if (allowEdit != "True") {
+                $(this).css('display', 'none');
+            }
+            if (isWK == "True") {
+                $(this).closest("tr").addClass('weekend');
+            }
+            if (IsHoliday == "True") {
+                $(this).closest("tr").addClass('holiday');
+            }
+        });
+        // alert("test");
+    }
+</script>
+}

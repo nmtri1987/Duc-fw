@@ -1,0 +1,12 @@
+@{
+
+ ViewBag.Title = "Missing Scan Time";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+<div id="missingScanTimeList">
+    @Html.Action("List")
+</div>

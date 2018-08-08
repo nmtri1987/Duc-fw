@@ -1,0 +1,154 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Biz.OG.Models;
+@model T_COM_Master_Location
+@{
+    ViewBag.Title = "T_COM_Master_Location";
+}
+<div class="row">
+    @using (Ajax.BeginForm("Create", "T_COM_Master_Location",
+                                        new AjaxOptions
+                                        {
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "T_COM_Master_Locationlist",
+                                            LoadingElementId = "loadingDisplay",
+                                            OnSuccess = "closePopup()",
+                                            OnBegin = "onBegin",
+                                            OnComplete = "onComplete",
+                                        }, new { @class = "form-horizontal", @id = "frmT_COM_Master_Location", enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.LocationID,new {@class= "form-control" })
+
+     
+        <div class="ibox float-e-margins">
+            
+            <div class="ibox-title">
+                <div class="panel-heading">
+                    <button type="submit" class="btn btn-sm btn-info" name="btnsave" value="save"><i class="fa fa-save"></i></button>
+                    <button class="btn btn-sm btn-info" type="button" name="Action" value="Refresh" data-url = "/T_COM_Master_Location/Get" data-key-id="LocationID" data-form-id = "frmT_COM_Master_Location" data-action="refresh" onclick="RefreshForm(this)"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-sm btn-info" data-url ="/T_COM_Master_Location/Get" data-action="add" data-form-id = "frmT_COM_Master_Location" data-key-id="LocationID" onclick="RefreshForm(this)">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-info" data-url="/T_COM_Master_Location/T_COM_Master_LocationEvt" data-action="delete" data-form-id="frmT_COM_Master_Location" data-key-id="LocationID" onclick="DeleteData(this)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+               @* @ngonngu("T_COM_Master_Location")*@
+            </div>
+            <div class="ibox-content">
+                <div id="loadingDisplay" class="progressBarLoad">
+                    <h2>@ngonngu("Progressing")...</h2>
+                    <div class="progress progress-striped ">
+                        <div id="loadProgressBar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">@ngonngu("LocationID")</label>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.LocationID, new { htmlAttributes = new { @class = "form-control T_COM_Master_Locationsrc", @placeholder = ngonngu("LocationID"), @data_url = "/T_COM_Master_Location/Search", @data_form_id = "frmT_COM_Master_Location" } })
+                        @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+			      <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("LocationID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LocationID, new { htmlAttributes = new { @class = "form-control",@disabled = ""} })
+               @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("LocationName")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LocationName, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("LocationName")} })
+               @Html.ValidationMessageFor(model => model.LocationName, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("LocationShortName")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LocationShortName, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("LocationShortName")} })
+               @Html.ValidationMessageFor(model => model.LocationShortName, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("Address_EN")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Address_EN, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("Address_EN")} })
+               @Html.ValidationMessageFor(model => model.Address_EN, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("Address_VN")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Address_VN, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("Address_VN")} })
+               @Html.ValidationMessageFor(model => model.Address_VN, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("EntityID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.EntityID, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("EntityID")} })
+               @Html.ValidationMessageFor(model => model.EntityID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("CreatedBy")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("CreatedBy")} })
+               @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("CreatedDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("CreatedDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("ModifiedBy")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("ModifiedBy")} })
+               @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("ModifiedDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("ModifiedDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("IsActive")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control i-checks js-switch", @placeholder=ngonngu("IsActive")} })
+               @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+             </div>
+         </div>
+             
+            </div>
+
+
+        </div>
+
+
+    }
+
+</div>
+
+  <script>
+        $(document).ready(function () {
+            $('#LocationID').onfocus(function (e) {
+               LoadAutoComplete(this);
+            });
+			 $('.date').datepicker({
+		     todayBtn: "linked",
+		     keyboardNavigation: false,
+		     forceParse: false,
+		     calendarWeeks: true,
+		     autoclose: true
+		 });
+        });
+
+    </script>

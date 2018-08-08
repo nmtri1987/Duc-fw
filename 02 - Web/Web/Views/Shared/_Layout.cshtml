@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bosch - @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/datapicker")
+    @Styles.Render("~/Scripts/css/Table")
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @Scripts.Render("~/js/Dtable")
+    @Scripts.Render("~/js/datapicker")
+    @Styles.Render("~/Content/iCheck")
+    @Styles.Render("~/Content/Lobibox")
+    @Scripts.Render("~/js/Lobibox")
+    @Scripts.Render("~/js/swichery")
+    @Scripts.Render("~/js/maskMoney")
+
+    <script type="text/javascript">
+        var appName = '@HttpContext.Current.Request.ApplicationPath'
+        if (appName == "/") {
+            appName = "";
+        }
+        var fullPath = '@HttpContext.Current.Request.Url.Scheme://@HttpContext.Current.Request.Url.Authority' + appName;
+        function GetPath(url) {
+            return fullPath + url;
+        }
+    </script>
+</head>
+
+<body class="">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="sitemap">
+
+            </div>
+        </div>
+    </div>
+   
+    <div id="wrapper">
+
+        <nav class="navbar-default navbar-static-side" role="navigation" style="border-right: 1px solid #2F4050;">
+            @Html.Partial("_MenuPartial")
+        </nav>
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+
+            @Html.Partial("_header")
+            <div class="row">
+                <div class="wrapper wrapper-content  animated fadeInRight">
+                    <div id="mainctn" class="content ">
+                        <div class="alert " style="display:none;position: absolute;width: 100%;top: 0;left: 0;">
+                            @*<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>*@
+                            &nbsp;<span class="message-notify"></span>
+                        </div>
+
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+            @Html.Partial("_Fooder")
+        </div>
+        @*@Html.Partial("_SmallChat")*@
+    </div>
+
+    <div aria-hidden="true" role="dialog" id="myModal" class="modal inmodal">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div id="popcnt" class="row"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div aria-hidden="true" role="dialog" tabindex="-1" id="myModalAlert" data-message="textMessage" data-button="btnOk" class="modal fade" style="display: none;">
+        <div class="modal-dialog" data-backdrop="static">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header text-left">
+                    <h2 class="modal-title" style="text-align:left;font-weight:700">@L("Warning")</h2>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div id="textMessage" class="row"></div>
+                    </div>
+                </div>
+                <div class="modal-footer " style="text-align:center">
+                    <button class="btn btn-primary" type="button" id="btnOk">@L("OK")</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    @Scripts.Render("~/bundles/unobtrusive")
+    @Scripts.Render("~/js/iCheck")
+    @*@Scripts.Render("~/js/app")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

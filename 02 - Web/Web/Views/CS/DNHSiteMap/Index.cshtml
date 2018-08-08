@@ -1,0 +1,11 @@
+@{
+    ViewBag.Title = "DNHSiteMap";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+<div id="DNHSiteMaplist">
+    @Html.Action("List")
+</div>

@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "DashBoard";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+@*<div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div>
+                        <div class="ifdcard" style="perspective: 982px; position: relative;">
+                            <div class="front" style="backface-visibility: hidden; transform-style: preserve-3d; position: absolute; z-index: 1; height: 100%; width: 100%; transition: all 0.5s ease-out 0s; transform: rotateY(0deg);">
+                                <div class="widget-head-color-box navy-bg p-lg text-center" style="backface-visibility: hidden;">
+                                    <div class="m-b-md" style="backface-visibility: hidden;">
+                                        <h2 class="font-bold no-margins" style="backface-visibility: hidden;">
+                                            Nguyen
+                                        </h2>
+                                    </div>
+                                    <img style="width: 128px; height: 128px; backface-visibility: hidden;" data-hiddenimg="ImgUrl" class="img-circle circle-border m-b-md" id="imgPictureCustomer" src="/img/Employee/Profile/dnh.jpg">
+                                    <div style="backface-visibility: hidden;">
+                                        <span style="backface-visibility: hidden;">Project Manager</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="back" style="backface-visibility: hidden; transform-style: preserve-3d; position: relative; z-index: 0; height: 100%; width: 100%; transform: rotateY(-180deg); transition: all 0.5s ease-out 0s;">
+                                <ul class="list-group clear-list" style="backface-visibility: hidden;">
+                                    <li class="list-group-item fist-item" style="backface-visibility: hidden;">
+                                        <span class="pull-right" style="backface-visibility: hidden;"></span>
+                                        <strong style="backface-visibility: hidden;">Email</strong>
+                                    </li>
+                                    <li class="list-group-item" style="backface-visibility: hidden;">
+                                        <span class="pull-right" style="backface-visibility: hidden;">Peter Nguyen </span>
+                                        <strong style="backface-visibility: hidden;">Name</strong>
+                                    </li>
+                                    <li class="list-group-item" style="backface-visibility: hidden;">
+                                        <span class="pull-right" style="backface-visibility: hidden;"> 0938226011 </span>
+                                        <strong style="backface-visibility: hidden;">Phone</strong>
+                                    </li>
+                                    <li class="list-group-item" style="backface-visibility: hidden;">
+                                        <span class="pull-right" style="backface-visibility: hidden;"> 2/28/2017 12:00:00 AM </span>
+                                        <strong style="backface-visibility: hidden;">DateofBirth</strong>
+                                    </li>
+                                    <li class="list-group-item" style="backface-visibility: hidden;">
+                                        <span class="pull-right" style="backface-visibility: hidden;"> PMG </span>
+                                        <strong style="backface-visibility: hidden;">DepartmentID</strong>
+                                    </li>
+                                    <li class="list-group-item" style="backface-visibility: hidden;">
+                                        <span class="pull-right" style="backface-visibility: hidden;"> USD </span>
+                                        <strong style="backface-visibility: hidden;">CuryId</strong>
+                                    </li>
+                                    <li class="list-group-item" style="backface-visibility: hidden;">
+                                        <span class="pull-right" style="backface-visibility: hidden;"> <a link="/EPEmployee/Info?EmpCD=EMP0000000320" show-link="true" dis="mainctn" href="#" class="mybtn" style="backface-visibility: hidden;"> admin  </a></span>
+                                        <strong style="backface-visibility: hidden;">ReportTo</strong>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="margin-top:10px;" class="row">
+                            <div class="col-sm-6">
+                                <button data="update" data-target="#InfoCtx" link="/EPEmployee/EmpMessage?EmpCD=EMP0000000022" dis="InfoCtx" class="btn btn-default btn-sm btn-block mybtn" type="button">
+                                    <i class="fa fa-envelope"></i> SendMessage
+                                </button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button type="button" dis="InfoCtx" link="/EPEmployee/EmpMember?EmpCD=EMP0000000022" title="Members" alt="Members" data="update" data-target="#InfoCtx" data-toggle="tab" class="mybtn btn btn-warning btn-sm btn-block" target="edit" href="#Members">
+                                    <i class="fa fa-user"></i> Members
+                                </button>
+                            </div>
+                        </div>
+                        <div style="margin-top:10px;" class="row">
+                            <div class="col-sm-6">
+                                <button data="update" data-target="#InfoCtx" link="/PMTimeActivity/EmpTask?EmpCD=EMP0000000022" dis="InfoCtx" class="btn btn-success btn-sm btn-block mybtn" type="button">
+                                    <i class="fa fa-tasks"></i> Tasks
+                                </button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button data="update" data-target="#InfoCtx" link="/EPEmployeePoint/EmpPoint?EmpCD=EMP0000000022" dis="InfoCtx" class="btn btn-primary btn-sm btn-block mybtn" type="button">
+                                    <i class="fa fa-quote-right"></i> Points
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <button data="update" data-toggle="modal" data-target="#myModal" link="/UserInfo/ChangePasswords" dis="popcnt" class="btn btn-outline  btn-block  btn-info  dim mybtn" type="button">
+                            <i class="fa fa-quote-right"></i> ChangePassword
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8"></div>
+
+    </div>
+
+</div>*@

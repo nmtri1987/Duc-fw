@@ -1,0 +1,16 @@
+
+@{
+    ViewBag.Title = "EmpTimesheet";
+  
+}
+@using (Ajax.BeginForm("T_TMS_EmployeeDailyTimesheetTransactionEvt", "EmpTimesheet",
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+        UpdateTargetId = "EmpTimesheetlist",
+        OnBegin = "onBegin",
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+
+	<div class="DNHtable" target_table="EmpTimesheet" PageName='@L("EmpTimesheet")' ></div>
+}

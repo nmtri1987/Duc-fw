@@ -1,0 +1,93 @@
+﻿@using Biz.CS.Services
+@using Biz.CS.Models
+<!-- navbar-fixed-top-->
+
+@*<nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-dark bg-success navbar-shadow navbar-hide-on-scroll">*@
+    <nav class="header-navbar navbar navbar-with-menu navbar-fixed-top navbar-dark bg-success  navbar-shadow">
+        
+        <div class="navbar-wrapper">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item mobile-menu hidden-md-up float-xs-left"><a href="#" class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="ft-menu font-large-1"></i></a></li>
+                    <li class="nav-item">
+                        <a href="index.html" class="navbar-brand">
+                            <img alt="stack admin logo" src="~/images/BOSCHLogo.png" class="brand-logo">
+                        </a>
+                    </li>
+                    <li class="nav-item hidden-md-up float-xs-right">
+                    <a data-toggle="collapse" data-target="#navbar-mobile" class="nav-link open-navbar-container"><i class="fa fa-ellipsis-v"></i></a></li>
+                </ul>
+            </div>
+            <div class="navbar-container content container-fluid">
+                <div id="navbar-mobile" class="collapse navbar-toggleable-sm">
+                    <ul class="nav navbar-nav">
+                        @*<li class="nav-item hidden-sm-down"><a href="#" class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="ft-menu"></i></a></li>*@
+                        <li class="nav-item hidden-sm-down"><a href="#" class="nav-link nav-menu-main menu-toggle hidden-xs"><i class="ft-menu"></i></a></li>
+                        @{
+                            DNHSiteMapCollection myItems = DNHSiteMapManager.GetAllByUser(CurrentUser.UserName, CurrentUser.CompanyID, Guid.Empty);
+                            DNHSiteMapCollection SecondMenu = new DNHSiteMapCollection();
+                            DNHSiteMap objitem;
+                            string css = "";
+
+                            for (int i = 0; i < myItems.Count; i++)
+                            {
+
+                                objitem = myItems[i];
+                                if (objitem != null)
+                                {
+                                    <li class="nav-item has-sub ifind">
+                                        <a class="nav-link mainmn" href="#" link='@DNHUrl(objitem.Url)' dis="submenu" targe-metnu="@objitem.NodeID">
+                                            <i class="@objitem.IconImage"></i><span data-i18n="" class="menu-title">@L(objitem.Title)</span>
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        }
+                    </ul>
+                    <ul class="nav navbar-nav float-xs-right">
+                        <li class="dropdown dropdown-user nav-item">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link">
+                                <span class="avatar avatar-online">@*<img src="" alt="avatar"><i></i>*@</span><span class="user-name">@CurrentUser.UserName</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a href="#" class="dropdown-item"><i class="ft-user"></i> Edit Profile</a><a href="#" class="dropdown-item"><i class="ft-mail"></i> My Inbox</a><a href="#" class="dropdown-item"><i class="ft-check-square"></i> Task</a><a href="#" class="dropdown-item"><i class="ft-comment-square"></i> Chats</a>
+                                <div class="dropdown-divider"></div><a href="#" class="dropdown-item"><i class="ft-power"></i> @L("Logout")</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+<!-- /////////////////////////////////////////////////////////////////////////#007acc///-->
+<div id="sticky-wrapper" class="sticky-wrapper header-navbar navbar" style="height: 40px; position: fixed; left: 0px; width: 100%; z-index: 200; top: 52px; ">
+    <div class="navbar navbar-horizontal navbar-fixed navbar-light navbar-without-dd-arrow navbar-shadow menu-border navbar-brand-center" role="navigation" data-menu="menu-wrapper" data-nav="brand-center">
+
+        @for (int i = 0; i < myItems.Count; i++)
+        {
+            css = "";
+            if (i == 0) { css = "active"; }
+            objitem = myItems[i];
+            SecondMenu = DNHSiteMapManager.GetAllByUser(CurrentUser.UserName, CurrentUser.CompanyID, objitem.NodeID);
+            <ul class="nav navbar-nav dnhsite @css" id="@objitem.NodeID" data-menu="smenu">
+                @foreach (DNHSiteMap objSecond in SecondMenu)
+                {
+                    if (objSecond.IsFolder || objSecond.Expanded || string.IsNullOrEmpty(objSecond.Url) || objSecond.Url == "#")
+                    {
+                        <li class="dropdown nav-item"><a href="#" targe-metnu="@objSecond.NodeID" class="dnhsmap menu-item"><span> @L(objSecond.Title)</span></a></li>
+                    }
+                    else
+                    {
+                        <li class="dropdown nav-item"><a targe-metnu="@objSecond.NodeID" class="mysitemap menu-item dnhsmap" href="#" link='@DNHUrl(objSecond.Url)' dis="mainctn"><i class="@objSecond.IconImage"></i> @L(objSecond.Title)</a></li>
+                        
+                    }
+                }
+            </ul>
+        }
+
+    </div>
+</div>
+<script language="javascript">
+  
+</script>

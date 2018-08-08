@@ -1,0 +1,11 @@
+@{
+    ViewBag.Title = "RoleSitemap";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+<div id="RoleSitemap_List">
+    @Html.Action("List")
+</div>

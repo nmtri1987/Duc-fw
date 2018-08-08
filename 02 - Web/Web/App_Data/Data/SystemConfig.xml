@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<WebApi>
+    
+  <api name="HouseBankingAPI" url="http://localhost:8090/" />
+  <!--<api name="HouseBankingAPI" url="http://localhost:52075/" />-->
+</WebApi>

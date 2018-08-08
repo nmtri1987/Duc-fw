@@ -1,0 +1,114 @@
+﻿@using Biz.CS.Services
+@using Biz.CS.Models
+<div data-scroll-to-active="true" class="main-menu menu-fixed menu-light menu-accordion menu-shadow">
+    <!-- main menu header-->
+    <!-- include includes/menu-header-->
+    <!-- / main menu header-->
+    <!-- main menu content-->
+    <div class="main-menu-content ps-container ps-theme-dark ps-active-y" data-ps-id="32801eac-81fe-8b05-a961-e765ba82ab68" style="height: 498px;">
+        <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
+            <li class="navigation-header">
+                <span>General</span><i data-toggle="tooltip" data-placement="right" data-original-title="General" class="ft-minus"></i>
+            </li>
+            @{
+                DNHSiteMapCollection myItems = DNHSiteMapManager.GetAllByUser(CurrentUser.UserName,CurrentUser.CompanyID,Guid.Empty);
+                DNHSiteMapCollection myChild = new DNHSiteMapCollection();
+                DNHSiteMap objitem;
+                for (int i = 0; i < myItems.Count; i++)
+                {
+                    objitem = myItems[i];
+                    if (objitem != null)
+                    {
+                        <li class="nav-item has-sub">
+                            <a href="index.html"><i class="@objitem.IconImage"></i><span data-i18n="" class="menu-title">@L(objitem.Title)</span></a>
+                            @Html.Partial("V1/SiteMap", objitem)
+                            @*@{
+                                myChild = DNHSiteMapManager.GetAllByUser(CurrentUser.UserName,objitem.CompanyID, objitem.NodeID);
+                                if (myChild.Count > 0)
+                                {
+                                    <ul class="menu-content" style="">
+                                        @for (int j = 0; j < myChild.Count; j++)
+                                        {
+                                            objitem = myChild[j];
+                                        <li >
+                                            <a class="mysitemap menu-item"  href="#" link='@DNHUrl(objitem.Url)' dis="mainctn">@L(objitem.Title)</a>
+                                        </li>
+                                        }
+                                    </ul>
+                                }
+
+                                            }*@
+                            @*<ul class="menu-content" style="">
+                                    <li class="">
+                                        <a href="dashboard-ecommerce.html" class="menu-item">eCommerce</a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="dashboard-analytics.html" class="menu-item">Analytics</a>
+                                    </li>
+                                    <li class="">
+                                        <a href="dashboard-fitness.html" class="menu-item">Fitness</a>
+                                    </li>
+                                </ul>*@
+                        </li>
+                    }
+                }
+            }
+            @*<li class="nav-item has-sub">
+                <a href="index.html"><i class="ft-home"></i><span data-i18n="" class="menu-title">Dashboard</span><span class="tag tag tag-primary tag-pill float-xs-right mr-2">3</span></a>
+                <ul class="menu-content" style="">
+                    <li class="">
+                        <a href="dashboard-ecommerce.html" class="menu-item">eCommerce</a>
+                    </li>
+                    <li class="active">
+                        <a href="dashboard-analytics.html" class="menu-item">Analytics</a>
+                    </li>
+                    <li class="">
+                        <a href="dashboard-fitness.html" class="menu-item">Fitness</a>
+                    </li>
+                </ul>
+            </li>*@
+            @*<li class="nav-item has-sub open">
+                <a href="#"><i class="ft-monitor"></i><span data-i18n="" class="menu-title">PDM</span></a>
+                <ul class="menu-content" style="">
+                    <li class="has-sub is-shown">
+                        <a href="#" class="menu-item">Vertical</a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="../vertical-menu-template" class="menu-item">Semi Light</a>
+                            </li>
+                            <li>
+                                <a href="../vertical-menu-template-semi-dark" class="menu-item">Semi Dark</a>
+                            </li>
+                            <li>
+                                <a href="../vertical-menu-template-nav-dark" class="menu-item">Nav Dark</a>
+                            </li>
+                            <li>
+                                <a href="../vertical-menu-template-light" class="menu-item">Light</a>
+                            </li>
+                            <li>
+                                <a href="../vertical-overlay-menu-template" class="menu-item">Overlay Menu</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="has-sub is-shown">
+                        <a href="#" class="menu-item">Horizontal</a>
+                        <ul class="menu-content">
+                            <li>
+                                <a href="../horizontal-menu-template" class="menu-item">Classic</a>
+                            </li>
+                            <li>
+                                <a href="../horizontal-menu-template-nav" class="menu-item">Nav Dark</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>*@
+
+        </ul>
+        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 3px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; height: 498px; right: 3px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 134px;"></div></div>
+    </div>
+    <!-- /main menu content-->
+    <!-- main menu footer-->
+    <!-- include includes/menu-footer-->
+    <!-- main menu footer-->
+</div>

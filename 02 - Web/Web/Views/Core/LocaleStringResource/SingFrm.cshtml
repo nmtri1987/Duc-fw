@@ -1,0 +1,127 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Biz.OG.Models;
+@model LocaleStringResource
+@{
+    ViewBag.Title = "LocaleStringResource";
+}
+<div class="row">
+    @using (Ajax.BeginForm("Create", "LocaleStringResource",
+                                        new AjaxOptions
+                                        {
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "LocaleStringResourcelist",
+                                            LoadingElementId = "loadingDisplay",
+                                            OnSuccess = "closePopup()",
+                                            OnBegin = "onBegin",
+                                            OnComplete = "onComplete",
+                                        }, new { @class = "form-horizontal", @id = "frmLocaleStringResource", enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.LocaleStringResourceID,new {@class= "form-control" })
+
+     
+        <div class="ibox float-e-margins">
+            
+            <div class="ibox-title">
+                <div class="panel-heading">
+                    <button type="submit" class="btn btn-sm btn-primary" name="btnsave" value="save"><i class="fa fa-save"></i></button>
+                    <button class="btn btn-sm btn-primary" type="button" name="Action" value="Refresh" data-url = "/LocaleStringResource/Get" data-key-id="LocaleStringResourceID" data-form-id = "frmLocaleStringResource" data-action="refresh" onclick="RefreshForm(this)"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-sm btn-primary" data-url ="/LocaleStringResource/Get" data-action="add" data-form-id = "frmLocaleStringResource" data-key-id="LocaleStringResourceID" onclick="RefreshForm(this)">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-primary" data-url="/LocaleStringResource/LocaleStringResourceEvt" data-action="delete" data-form-id="frmLocaleStringResource" data-key-id="LocaleStringResourceID" onclick="DeleteData(this)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+               @* @L("LocaleStringResource")*@
+            </div>
+            <div class="ibox-content">
+                <div id="loadingDisplay" class="progressBarLoad">
+                    <h2>@L("Progressing")...</h2>
+                    <div class="progress progress-striped ">
+                        <div id="loadProgressBar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">@L("LocaleStringResourceID")</label>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.LocaleStringResourceID, new { htmlAttributes = new { @class = "form-control LocaleStringResourcesrc", @placeholder = L("LocaleStringResourceID"), @data_url = "/LocaleStringResource/Search", @data_form_id = "frmLocaleStringResource" } })
+                        @Html.ValidationMessageFor(model => model.LocaleStringResourceID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+			      <div class="form-group">
+             <label class="col-sm-2 control-label">@L("LocaleStringResourceID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LocaleStringResourceID, new { htmlAttributes = new { @class = "form-control",@disabled = ""} })
+               @Html.ValidationMessageFor(model => model.LocaleStringResourceID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("LanguageID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LanguageID, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("LanguageID")} })
+               @Html.ValidationMessageFor(model => model.LanguageID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ResourceName")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ResourceName, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ResourceName")} })
+               @Html.ValidationMessageFor(model => model.ResourceName, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ResourceValue")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ResourceValue, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ResourceValue")} })
+               @Html.ValidationMessageFor(model => model.ResourceValue, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("CompanyID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.CompanyID, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("CompanyID")} })
+               @Html.ValidationMessageFor(model => model.CompanyID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("CreatedUser")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.CreatedUser, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("CreatedUser")} })
+               @Html.ValidationMessageFor(model => model.CreatedUser, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("CreatedDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("CreatedDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+             </div>
+         </div>
+             
+            </div>
+
+
+        </div>
+
+
+    }
+
+</div>
+
+  <script>
+        $(document).ready(function () {
+            $('#LocaleStringResourceID').onfocus(function (e) {
+               LoadAutoComplete(this);
+            });
+			 $('.date').datepicker({
+		     todayBtn: "linked",
+		     keyboardNavigation: false,
+		     forceParse: false,
+		     calendarWeeks: true,
+		     autoclose: true
+		 });
+        });
+
+    </script>

@@ -1,0 +1,517 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using ifinds.Object.OG.Models;
+@model T_CMS_Master_Contract
+@{
+    ViewBag.Title = "T_CMS_Master_Contract";
+}
+<div class="row">
+    @using (Ajax.BeginForm("Create", "T_CMS_Master_Contract",
+                                        new AjaxOptions
+                                        {
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "T_CMS_Master_Contractlist",
+                                            LoadingElementId = "loadingDisplay",
+                                            OnSuccess = "closePopup()",
+                                            OnBegin = "onBegin",
+                                            OnComplete = "onComplete",
+                                        }, new { @class = "form-horizontal", @id = "frmT_CMS_Master_Contract", enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.ID,new {@class= "form-control" })
+
+     
+        <div class="ibox float-e-margins">
+            
+            <div class="ibox-title">
+                <div class="panel-heading">
+                    <button type="submit" class="btn btn-sm btn-info" name="btnsave" value="save"><i class="fa fa-save"></i></button>
+                    <button class="btn btn-sm btn-info" type="button" name="Action" value="Refresh" data-url = "/T_CMS_Master_Contract/Get" data-key-id="ID" data-form-id = "frmT_CMS_Master_Contract" data-action="refresh" onclick="RefreshForm(this)"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-sm btn-info" data-url ="/T_CMS_Master_Contract/Get" data-action="add" data-form-id = "frmT_CMS_Master_Contract" data-key-id="ID" onclick="RefreshForm(this)">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-info" data-url="/T_CMS_Master_Contract/T_CMS_Master_ContractEvt" data-action="delete" data-form-id="frmT_CMS_Master_Contract" data-key-id="ID" onclick="DeleteData(this)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+               @* @ngonngu("T_CMS_Master_Contract")*@
+            </div>
+            <div class="ibox-content">
+                <div id="loadingDisplay" class="progressBarLoad">
+                    <h2>@ngonngu("Progressing")...</h2>
+                    <div class="progress progress-striped ">
+                        <div id="loadProgressBar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">@ngonngu("ID")</label>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control T_CMS_Master_Contractsrc", @placeholder = ngonngu("ID"), @data_url = "/T_CMS_Master_Contract/Search", @data_form_id = "frmT_CMS_Master_Contract" } })
+                        @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+			      <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("ID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control",@disabled = ""} })
+               @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("EmployeeCode")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.EmployeeCode, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("EmployeeCode")} })
+               @Html.ValidationMessageFor(model => model.EmployeeCode, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("ContractNo")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ContractNo, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("ContractNo")} })
+               @Html.ValidationMessageFor(model => model.ContractNo, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("StatusID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.StatusID, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("StatusID")} })
+               @Html.ValidationMessageFor(model => model.StatusID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("ApproverLevel")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ApproverLevel, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("ApproverLevel")} })
+               @Html.ValidationMessageFor(model => model.ApproverLevel, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("ContractLevel")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ContractLevel, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("ContractLevel")} })
+               @Html.ValidationMessageFor(model => model.ContractLevel, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("SalutationID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.SalutationID, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("SalutationID")} })
+               @Html.ValidationMessageFor(model => model.SalutationID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("FirstName_EN")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.FirstName_EN, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("FirstName_EN")} })
+               @Html.ValidationMessageFor(model => model.FirstName_EN, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("MiddleName_EN")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.MiddleName_EN, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("MiddleName_EN")} })
+               @Html.ValidationMessageFor(model => model.MiddleName_EN, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("LastName_EN")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LastName_EN, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("LastName_EN")} })
+               @Html.ValidationMessageFor(model => model.LastName_EN, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("FirstName_VN")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.FirstName_VN, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("FirstName_VN")} })
+               @Html.ValidationMessageFor(model => model.FirstName_VN, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("MiddleName_VN")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.MiddleName_VN, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("MiddleName_VN")} })
+               @Html.ValidationMessageFor(model => model.MiddleName_VN, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("LastName_VN")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LastName_VN, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("LastName_VN")} })
+               @Html.ValidationMessageFor(model => model.LastName_VN, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("DOB")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("DOB")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("POB")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.POB, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("POB")} })
+               @Html.ValidationMessageFor(model => model.POB, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("HighestDegree")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.HighestDegree, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("HighestDegree")} })
+               @Html.ValidationMessageFor(model => model.HighestDegree, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("EmpAddress")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.EmpAddress, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("EmpAddress")} })
+               @Html.ValidationMessageFor(model => model.EmpAddress, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("IDCardNo")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.IDCardNo, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("IDCardNo")} })
+               @Html.ValidationMessageFor(model => model.IDCardNo, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("IDDOI")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.IDDOI, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("IDDOI")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.IDDOI, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("IDPOI")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.IDPOI, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("IDPOI")} })
+               @Html.ValidationMessageFor(model => model.IDPOI, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("PassportNo")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.PassportNo, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("PassportNo")} })
+               @Html.ValidationMessageFor(model => model.PassportNo, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("PassportDOI")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.PassportDOI, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("PassportDOI")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.PassportDOI, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("PassportPOI")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.PassportPOI, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("PassportPOI")} })
+               @Html.ValidationMessageFor(model => model.PassportPOI, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("LabourBookNo")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LabourBookNo, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("LabourBookNo")} })
+               @Html.ValidationMessageFor(model => model.LabourBookNo, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("LabourDOI")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.LabourDOI, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("LabourDOI")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.LabourDOI, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("LabourPOI")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LabourPOI, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("LabourPOI")} })
+               @Html.ValidationMessageFor(model => model.LabourPOI, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("ContractTerm")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ContractTerm, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("ContractTerm")} })
+               @Html.ValidationMessageFor(model => model.ContractTerm, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("Joiningdate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.Joiningdate, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("Joiningdate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.Joiningdate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("Enddate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.Enddate, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("Enddate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.Enddate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("PositionID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.PositionID, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("PositionID")} })
+               @Html.ValidationMessageFor(model => model.PositionID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("LocationID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LocationID, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("LocationID")} })
+               @Html.ValidationMessageFor(model => model.LocationID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("GradeID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.GradeID, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("GradeID")} })
+               @Html.ValidationMessageFor(model => model.GradeID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("DeptID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.DeptID, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("DeptID")} })
+               @Html.ValidationMessageFor(model => model.DeptID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("WorkHoursID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.WorkHoursID, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("WorkHoursID")} })
+               @Html.ValidationMessageFor(model => model.WorkHoursID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("Grossoffer")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Grossoffer, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("Grossoffer")} })
+               @Html.ValidationMessageFor(model => model.Grossoffer, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("AnnualLeave")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.AnnualLeave, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("AnnualLeave")} })
+               @Html.ValidationMessageFor(model => model.AnnualLeave, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("EmpTypeID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.EmpTypeID, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("EmpTypeID")} })
+               @Html.ValidationMessageFor(model => model.EmpTypeID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("EmpSubTypeID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.EmpSubTypeID, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("EmpSubTypeID")} })
+               @Html.ValidationMessageFor(model => model.EmpSubTypeID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("WorkPermitNo")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.WorkPermitNo, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("WorkPermitNo")} })
+               @Html.ValidationMessageFor(model => model.WorkPermitNo, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("WorkPermitFrom")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.WorkPermitFrom, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("WorkPermitFrom")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.WorkPermitFrom, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("WorkPermitTo")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.WorkPermitTo, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("WorkPermitTo")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.WorkPermitTo, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("HomeGrossOffer")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.HomeGrossOffer, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("HomeGrossOffer")} })
+               @Html.ValidationMessageFor(model => model.HomeGrossOffer, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("HomeCountryCurrency")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.HomeCountryCurrency, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("HomeCountryCurrency")} })
+               @Html.ValidationMessageFor(model => model.HomeCountryCurrency, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("HomeGrossOfferEffectiveFrom")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.HomeGrossOfferEffectiveFrom, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("HomeGrossOfferEffectiveFrom")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.HomeGrossOfferEffectiveFrom, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("HomeGrossOfferEffectiveTo")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.HomeGrossOfferEffectiveTo, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("HomeGrossOfferEffectiveTo")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.HomeGrossOfferEffectiveTo, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("RelocationallowanceCurrency")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.RelocationallowanceCurrency, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("RelocationallowanceCurrency")} })
+               @Html.ValidationMessageFor(model => model.RelocationallowanceCurrency, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("Relocationallowance")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Relocationallowance, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("Relocationallowance")} })
+               @Html.ValidationMessageFor(model => model.Relocationallowance, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("GoabroadallowanceCurrency")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.GoabroadallowanceCurrency, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("GoabroadallowanceCurrency")} })
+               @Html.ValidationMessageFor(model => model.GoabroadallowanceCurrency, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("Goabroadallowance")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Goabroadallowance, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("Goabroadallowance")} })
+               @Html.ValidationMessageFor(model => model.Goabroadallowance, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("WaivingallowanceCurrency")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.WaivingallowanceCurrency, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("WaivingallowanceCurrency")} })
+               @Html.ValidationMessageFor(model => model.WaivingallowanceCurrency, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("Waivingallowance")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Waivingallowance, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("Waivingallowance")} })
+               @Html.ValidationMessageFor(model => model.Waivingallowance, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("HostCountryCurrency")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.HostCountryCurrency, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("HostCountryCurrency")} })
+               @Html.ValidationMessageFor(model => model.HostCountryCurrency, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("HostGrossOfferEffectiveFrom")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.HostGrossOfferEffectiveFrom, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("HostGrossOfferEffectiveFrom")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.HostGrossOfferEffectiveFrom, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("HostGrossOfferEffectiveTo")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.HostGrossOfferEffectiveTo, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("HostGrossOfferEffectiveTo")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.HostGrossOfferEffectiveTo, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("Remarks")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("Remarks")} })
+               @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("CreatedBy")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("CreatedBy")} })
+               @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("CreatedDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("CreatedDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("ModifiedBy")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("ModifiedBy")} })
+               @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("ModifiedDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("ModifiedDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("IsActive")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control i-checks js-switch", @placeholder=ngonngu("IsActive")} })
+               @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("ProbationsPeriod")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ProbationsPeriod, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("ProbationsPeriod")} })
+               @Html.ValidationMessageFor(model => model.ProbationsPeriod, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("OriginalDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.OriginalDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("OriginalDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.OriginalDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("WorkFlowStatus")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.WorkFlowStatus, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("WorkFlowStatus")} })
+               @Html.ValidationMessageFor(model => model.WorkFlowStatus, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("HandPhone")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.HandPhone, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("HandPhone")} })
+               @Html.ValidationMessageFor(model => model.HandPhone, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("TempAddress")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.TempAddress, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("TempAddress")} })
+               @Html.ValidationMessageFor(model => model.TempAddress, "", new { @class = "text-danger" })
+             </div>
+         </div>
+             
+            </div>
+
+
+        </div>
+
+
+    }
+
+</div>
+
+  <script>
+        $(document).ready(function () {
+            $('#ID').onfocus(function (e) {
+               LoadAutoComplete(this);
+            });
+			 $('.date').datepicker({
+		     todayBtn: "linked",
+		     keyboardNavigation: false,
+		     forceParse: false,
+		     calendarWeeks: true,
+		     autoclose: true
+		 });
+        });
+
+    </script>

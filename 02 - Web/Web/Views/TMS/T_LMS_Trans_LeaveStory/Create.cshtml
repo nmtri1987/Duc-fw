@@ -1,0 +1,276 @@
+@using Biz.TMS.Models
+@model T_LMS_Trans_LeaveStory
+@{
+    ViewBag.Title = "T_LMS_Trans_LeaveStory";
+}
+@using (Ajax.BeginForm("Create", "T_LMS_Trans_LeaveStory", 
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+		UpdateTargetId ="T_LMS_Trans_LeaveStorylist",
+        LoadingElementId ="loadingDisplay",
+        OnSuccess ="closePopup()",
+        OnBegin = "onBegin", 
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+                    @Html.ValidationSummary(true)
+					 @Html.HiddenFor(m => m.Id)
+ <div class="ibox float-e-margins">
+     <div class="ibox-title">
+         @L("T_LMS_Trans_LeaveStory")
+     </div>
+     <div class="ibox-content">
+	 <div id="loadingDisplay" class="progressBarLoad">
+             <h2>@L("Progressing")...</h2>
+             <div class="progress progress-striped ">
+                 <div id="loadProgressBar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+             </div>
+         </div>
+	   <div class="form-group">
+             <label class="col-sm-2 control-label">@L("Id")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control",@disabled = ""} })
+               @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("EmployeeCode")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.EmployeeCode, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("EmployeeCode")} })
+               @Html.ValidationMessageFor(model => model.EmployeeCode, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("LeaveTypeId")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LeaveTypeId, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("LeaveTypeId")} })
+               @Html.ValidationMessageFor(model => model.LeaveTypeId, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("StartDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("StartDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("EndDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("EndDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("FromTime")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.FromTime, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("FromTime")} })
+               @Html.ValidationMessageFor(model => model.FromTime, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ToTime")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ToTime, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ToTime")} })
+               @Html.ValidationMessageFor(model => model.ToTime, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("NoOfDays")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.NoOfDays, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("NoOfDays")} })
+               @Html.ValidationMessageFor(model => model.NoOfDays, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("NoOfHours")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.NoOfHours, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("NoOfHours")} })
+               @Html.ValidationMessageFor(model => model.NoOfHours, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("HalfDayPart")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.HalfDayPart, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("HalfDayPart")} })
+               @Html.ValidationMessageFor(model => model.HalfDayPart, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("Remarks")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Remarks, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("Remarks")} })
+               @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ApproverComments")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ApproverComments, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ApproverComments")} })
+               @Html.ValidationMessageFor(model => model.ApproverComments, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("StatusId")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.StatusId, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("StatusId")} })
+               @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ApprovalLevel")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ApprovalLevel, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ApprovalLevel")} })
+               @Html.ValidationMessageFor(model => model.ApprovalLevel, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("IsUpdatedByAdmin")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.IsUpdatedByAdmin, new { htmlAttributes = new { @class = "form-control i-checks js-switch", @placeholder=L("IsUpdatedByAdmin")} })
+               @Html.ValidationMessageFor(model => model.IsUpdatedByAdmin, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("IsOverriddenLeave")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.IsOverriddenLeave, new { htmlAttributes = new { @class = "form-control i-checks js-switch", @placeholder=L("IsOverriddenLeave")} })
+               @Html.ValidationMessageFor(model => model.IsOverriddenLeave, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("OverriddenLeaveId")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.OverriddenLeaveId, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("OverriddenLeaveId")} })
+               @Html.ValidationMessageFor(model => model.OverriddenLeaveId, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("IsNC")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.IsNC, new { htmlAttributes = new { @class = "form-control i-checks js-switch", @placeholder=L("IsNC")} })
+               @Html.ValidationMessageFor(model => model.IsNC, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("OldStatusId")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.OldStatusId, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("OldStatusId")} })
+               @Html.ValidationMessageFor(model => model.OldStatusId, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("OldApprovalLevelId")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.OldApprovalLevelId, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("OldApprovalLevelId")} })
+               @Html.ValidationMessageFor(model => model.OldApprovalLevelId, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("IsAcitve")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.IsAcitve, new { htmlAttributes = new { @class = "form-control i-checks js-switch", @placeholder=L("IsAcitve")} })
+               @Html.ValidationMessageFor(model => model.IsAcitve, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("CreatedBy")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("CreatedBy")} })
+               @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("CreatedDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("CreatedDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ModifiedBy")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ModifiedBy")} })
+               @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ModifiedDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ModifiedDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("Ref_RequestId")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Ref_RequestId, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("Ref_RequestId")} })
+               @Html.ValidationMessageFor(model => model.Ref_RequestId, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("UploadStatus")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.UploadStatus, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("UploadStatus")} })
+               @Html.ValidationMessageFor(model => model.UploadStatus, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("LastUploadDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.LastUploadDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("LastUploadDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.LastUploadDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("LastUploadedToDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.LastUploadedToDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("LastUploadedToDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.LastUploadedToDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("NextLevelId")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.NextLevelId, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("NextLevelId")} })
+               @Html.ValidationMessageFor(model => model.NextLevelId, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("NextApproverRoleId")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.NextApproverRoleId, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("NextApproverRoleId")} })
+               @Html.ValidationMessageFor(model => model.NextApproverRoleId, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("CancelRequestCreatedOn")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.CancelRequestCreatedOn, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("CancelRequestCreatedOn")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.CancelRequestCreatedOn, "", new { @class = "text-danger" })
+             </div>
+         </div>
+       
+
+     </div>
+     
+         <div class="hr-line-dashed"></div>
+
+         <div class="form-group">
+             <div class="col-sm-12">
+                 <button type="submit" class="btn btn-primary btn-block" name="btnsave" value="save">@L("SaveChange")</button>
+             </div>
+         </div>
+     </div>
+
+
+ }
+
+
+  @Scripts.Render("~/bundles/jqueryval")
+
+   <script>
+    $(document).ready(function () {
+	 var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+		 elems.forEach(function (html) {
+		     var switchery = new Switchery(html, { color: '#1AB394' });
+		 });
+		   $('.date').datepicker({
+		     todayBtn: "linked",
+		     keyboardNavigation: false,
+		     forceParse: false,
+		     calendarWeeks: true,
+		     autoclose: true
+		 });
+    });
+</script>

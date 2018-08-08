@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = L("Timesheet Approval");
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+<div id="hrm_atd_ScanTimeApprovallist">
+    @Html.Action("List")
+</div>

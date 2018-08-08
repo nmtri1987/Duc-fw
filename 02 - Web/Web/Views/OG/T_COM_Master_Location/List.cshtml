@@ -1,0 +1,55 @@
+@using Biz.OG.Models
+@model T_COM_Master_LocationCollection
+@{
+    ViewBag.Title = "T_COM_Master_Location";
+  
+}
+@using (Ajax.BeginForm("T_COM_Master_LocationEvt", "T_COM_Master_Location", 
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+        UpdateTargetId ="T_COM_Master_Locationlist",
+        OnBegin = "onBegin", 
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+	<div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary list-panel" id="list-panel">
+                <div class="panel-heading list-panel-heading" style="height:44px;">
+
+                    <h3 class="panel-title list-panel-title">@L("T_COM_Master_Location")</h3>
+
+                </div>
+
+                <div class="panel-body">
+					<div class="pull-right">
+						<a class="btn btn-info"  href='@Url.Action("ListUpload", "T_COM_Master_Location", new { Code = "" })' dis="popcnt" target="ExcelImport">
+							<i class="fa fa-upload"></i>
+							@L("Import")
+						</a>
+						<a href='@Url.Action("ExportExcel", "T_COM_Master_Location", new { Code = "" })' class="btn btn-sm btn-info" title="ExportToExcel" id="btnExportExcel">
+							<i class="fa fa-download"></i>
+						</a>
+					</div>
+                    <button type="button" class="btn btn-sm btn-default btndtbT_COM_Master_Location" data-target="#myModal" data-toggle="modal" data="add" link='@Url.Action("Create", "T_COM_Master_Location", new { Code = "" })'  dis="popcnt">
+                        <i class="fa fa-pencil"></i>
+                    </button>
+                    <button class="btn btn-sm btn-default" type="submit" name="Action" value="Delete"><i class="fa fa-trash"></i></button>
+                    <button type="button" class="btn btn-default btn-sm refresh-button" class="refresh-btn"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+
+                    <hr />
+                    <div>
+                        <table id="dtbT_COM_Master_Location" class="table table-striped table-bordered" data-url='@Url.Action("GetGata", "T_COM_Master_Location")'
+                         arr-id="T_COM_Master_Locationarr" key="LocationID" default-search="" allow-search="1" allow-chk="1" style="width:100%"></table>
+						<input type='hidden' value="['LocationID','LocationName','LocationShortName','Address_EN','Address_VN','EntityID','CreatedBy','CreatedDate','ModifiedBy','ModifiedDate','IsActive',]" id='T_COM_Master_Locationarr' />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script language="javascript">
+        $(function () {
+           TableShow("dtbT_COM_Master_Location");
+        })
+    </script>
+}

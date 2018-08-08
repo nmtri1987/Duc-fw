@@ -1,0 +1,7 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace Biz.OG.Controllers
+{
+    public class DNHUsersController : BaseController<DNHUsers> {}
+}

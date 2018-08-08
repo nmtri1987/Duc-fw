@@ -1,0 +1,11 @@
+@{
+        ViewBag.Title = "Employee";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+<div id="T_COM_Master_Employeelist">
+    @Html.Action("List")
+</div>

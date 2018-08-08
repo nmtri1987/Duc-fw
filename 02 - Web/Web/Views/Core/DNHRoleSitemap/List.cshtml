@@ -1,0 +1,19 @@
+
+
+@{
+    ViewBag.Title = "DNHUserInRoles";
+
+}
+@using (Ajax.BeginForm("DNHUserInRolesEvt", "RoleSitemap",
+                new AjaxOptions
+                {
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "POST",
+                    UpdateTargetId = "RoleSitemap_List",
+                    OnBegin = "onBegin",
+                    OnComplete = "onComplete",
+                }, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+
+    <div class="DNHtable" target_table="RoleSitemap" PageName='@L("RoleSitemap")'></div>
+}

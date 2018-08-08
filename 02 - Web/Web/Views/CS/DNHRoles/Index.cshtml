@@ -1,0 +1,11 @@
+@{
+    ViewBag.Title = "DNHRoles";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+<div id="DNHRoleslist">
+    @Html.Action("List")
+</div>

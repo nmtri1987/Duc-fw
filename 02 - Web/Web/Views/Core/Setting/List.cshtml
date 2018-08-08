@@ -1,0 +1,14 @@
+@{
+    ViewBag.Title = "Setting";
+  
+}
+@using (Ajax.BeginForm("SettingEvt", "Setting", 
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+        UpdateTargetId ="Settinglist",
+        OnBegin = "onBegin", 
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+	 <div class="DNHtable" target_table="Setting" PageName='@L("Setting")'></div>
+}

@@ -1,0 +1,52 @@
+
+@{
+    ViewBag.Title = "DNHUsers";
+  
+}
+@using (Ajax.BeginForm("DNHUsersEvt", "DNHUsers",
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+        OnSuccess= "onReload",
+        UpdateTargetId ="DNHUserslists",
+        OnBegin = "onBegin",
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+	<section>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-primary" id="btnSwitchUser"
+                            value="changeuser" name="Event" data-url="#">
+                        @L("SwitchUser")
+                    </button>
+                </div>
+            </div>
+           
+        </div>
+    </section>
+	<div class="DNHtable" target_table="DNHUsers" PageName='@L("DNHUsers")' np="usersColection"></div>
+    <script type="text/javascript">
+        var onReload = function (data) {
+            console.log(data);
+            if (data.Event == "changeuser" && data.result == 1) {
+               window.location.reload();
+           }
+        }
+        $("#btnSwitchUser").prop("disabled", true);
+        function selectRow(ob) {
+            var count = 0;
+            $(".selectcol").each(function () {
+                var isCheck = $(this).is(':checked');
+                if (isCheck) {
+                    count++;
+                }
+            })
+            if (count == 1) {
+                $("#btnSwitchUser").prop("disabled", false);
+            } else {
+                $("#btnSwitchUser").prop("disabled", true);
+            }
+        }
+    </script>
+}

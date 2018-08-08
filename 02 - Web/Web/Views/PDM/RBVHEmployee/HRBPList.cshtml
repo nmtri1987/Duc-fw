@@ -1,0 +1,97 @@
+@using Biz.OG.Models
+@using Biz.OG.Services;
+@{
+    ViewBag.Title = "T_COM_Master_Employee";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+@using (Ajax.BeginForm("T_COM_Master_EmployeeEvt", "HRBPEmployee",
+                                                                            new AjaxOptions
+                                                                            {
+                                                                                InsertionMode = InsertionMode.Replace,
+                                                                                HttpMethod = "POST",
+                                                                                UpdateTargetId = "T_COM_Master_Employeelist",
+                                                                                OnBegin = "onBegin",
+                                                                                OnComplete = "onComplete",
+                                                                            }, new { @class = "form-horizontal", enctype = "multipart/form-data", id = "myform" }))
+{
+    <section>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="filter" id="frmFilter" name="frmFilter">
+                        <hr />
+                        <h4 class="form-section"><i class="fa fa-filter"></i>  Employee Filter</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="col-sm-2 control-label">@L("Entity")</label>
+                                        <div class="col-sm-3">
+                                            @Html.DropDownList("EntityId",
+                                        new SelectList(T_COM_Master_EntityManager.GetAllByEmployeeCode(CurrentUser.EmployeeCode), "EntityId", "ShortName_EN"), @L("-- All--"),
+                                        new { @class = "form-control chosen-select select-control frmfilter", @id = "EntityId" })
+                                        </div>
+                                       
+                                        
+                                    </div>
+
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="col-sm-2 control-label">@L("Department")</label>
+                                        <div class="col-sm-3">
+                                            @Html.DropDownList("OrgId",
+                                        new SelectList(T_COm_Master_OrgManager.GetAll(), "OrgId", "OrgName"), @L("-- All--"),
+                                        new { @class = "form-control chosen-select select-control frmfilter", @id = "OrgId" })
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-primary pull-right btnSearch" id="btnSearch" data-url='@Url.Action("GetHRBPSearchData", "HRBPEmployee")' data-query="EmployeCD,fromdate,todate" data-targetid="tbListEmploy">
+                                                <i class="fa fa-search"></i>
+                                                @L("Search")
+                                            </button>
+                                        </div>
+                                    </div>
+                                    </div>
+
+                                </div>
+                           
+                            @*<div class="col-md-3">
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-primary pull-right" id="mysearch" data-url='@Url.Action("GetContractHistoryData", "Contract")' data-query="EmployeCD,fromdate,todate" data-targetid="tbListEmploy">
+                                        <i class="fa fa-search"></i>
+                                        @L("Report")
+                                    </button>
+                                </div>
+                            </div>*@
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div  class="DNHtable" target_table="HRBPEmployee" PageName='@L("Employee_List")' disedit="1" fcol="5"></div>
+}
+<script language="javascript">
+    $(function () {
+        $("#mysearch").click(function () {
+            var Entity = $("#EntityId").val();
+            if (Entity == "") {
+                alert("Please select Entity");
+                return;
+            }
+            var url = '@Url.Action("ApendixHisReport")';
+            var js = form_to_json("myform", "frmfilter");
+            url += "?searchprm=" + JSON.stringify(js);
+            window.open(url);
+            //$("#dtbEPPosition").attr("data-url", url);
+            //$("#dtbEPPosition").DataTable().destroy();
+            //$("#dtbEPPosition").html('');
+            //TableReportShow("dtbEPPosition");
+        })
+    })
+
+</script>

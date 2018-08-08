@@ -1,0 +1,98 @@
+﻿.menuFrameI {
+    background-color: white;
+    overflow: hidden;
+    position: relative;
+}
+ul.asTable {
+    display: table;
+    white-space: nowrap;
+}
+ul.toolsList {
+    border-spacing: 0;
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+ul.asTable > li {
+    display: table-cell;
+     margin: 0;
+    vertical-align: middle;
+}
+.toolBarSubMod .toolsList, .toolBarSubMod .toolsBtn {
+    width: 100%;
+}
+.toolsBtn {
+    display: table;
+}
+
+.toolsBtn div[data-type] {
+    display: table-cell;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.toolSubModPushed {
+    background-color: #fff;
+    border-bottom-width: 0;
+    border-top: 2px solid #007acc !important;
+    opacity: 1;
+    padding-bottom: 10px;
+     cursor: default;
+     text-align: center;
+}
+.main-icon {
+    height: 18px;
+    width: 18px;
+}
+.sprite-icon {
+    direction: ltr;
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+    vertical-align: middle;
+}
+.main-DataEntryF {
+    left: -2px;
+    top: -202px;
+}
+.main-icon-img {
+    position: absolute;
+}
+.toolSubModNormal, .toolSubModDisabled, .toolSubModPushed, .toolSubModDD {
+    border-bottom: 1px solid #bdbdbd;
+    border-left: 1px solid #bdbdbd;
+    border-top: 1px solid #bdbdbd;
+    cursor: default;
+    opacity: 0.6;
+    padding: 9px;
+    text-align: center;
+}
+.toolBarSubMod {
+    background-color: #e0e0e0;
+}
+
+
+.toolsBtn:hover .toolSubModNormal
+{
+	opacity: 0.87;
+	background-color: #007acc;
+	border-top: 1px solid #007acc;
+	cursor: pointer;
+}
+.toolSubModDisabled
+{
+	color: RGBA(0,0,0,0.26);
+}
+.toolSubModPushed
+{
+	background-color: White;
+	border-bottom-width: 0px;
+	border-top: 2px solid #007acc;
+	padding-bottom: 10px;
+	opacity:1;
+}
+
+th.weekend{
+    background-color:yellow;
+}

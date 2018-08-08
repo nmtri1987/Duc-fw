@@ -1,0 +1,152 @@
+@using LV.TMS.Models
+@using Biz.OG.Services;
+@using LV.TMS.Models
+@model TimeSheetearchpara
+
+@{
+    ViewBag.Title = "hrm_atd_ScanTime";
+
+}
+@using (Ajax.BeginForm("hrm_atd_ScanTimeEvt", "Timesheet",
+                                                                      new AjaxOptions
+                                                                      {
+                                                                          InsertionMode = InsertionMode.Replace,
+                                                                          HttpMethod = "POST",
+                                                                          UpdateTargetId = "hrm_atd_ScanTimelist",
+                                                                          OnBegin = "onBegin",
+                                                                          OnComplete = "onComplete",
+                                                                      }, new { @class = "form-horizontal", enctype = "multipart/form-data", id = "myform" }))
+{
+    <section>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="filter" id="frmFilter" name="frmFilter">
+                        <hr />
+                        <h4 class="form-section"><i class="fa fa-filter"></i>  @L("Manual In/Out")</h4>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @*<label class="col-sm-2 control-label">@L("Entity")</label>*@
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-3">
+                                            @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @class = "form-control frmfilter", @placeholder = L("FromDate") } })
+                                            @*@Html.DropDownList("EntityId",
+                                                new SelectList(T_COM_Master_EntityManager.GetAllByEmployeeCode(CurrentUser.EmployeeCode), "EntityId", "ShortName_EN"), @L("-- All--"),
+                                                new { @class = "form-control chosen-select select-control frmfilter", @id = "EntityId" })*@
+                                        </div>
+
+                                        <div class="col-sm-3">
+                                            @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @class = "form-control frmfilter", @placeholder = L("ToDate") } })
+                                        </div>
+
+                                        <div class="col-sm-4">
+                                            <button style="margin-top:29px;" type="button" class="btn btn-primary btnSearch" id="btnSearch" data-url='@Url.Action("GetSearchData", "Timesheet")' data-query="EmployeCD,fromdate,todate" data-targetid="tbListEmploy">
+                                                <i class="fa fa-search"></i>
+                                                @L("Search")
+                                            </button>
+                                            &nbsp;
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="col-md-12" style="padding:20px;">
+                                <button type="button" class="btn  btn-holiday">@L("Holiday")</button>
+                                <button type="button" class="btn btn-weekend">@L("Weekend")</button>
+
+                                <div class="pull-right">
+                                    <button type="submit" class="btn btn-primary  " name="Event" id="btnSubmit" value="submit" data-url='#' data-query="EmployeCD,fromdate,todate" data-targetid="tbListEmploy">
+                                        <i class="fa dt-button"></i>
+                                        @L("Submit")
+                                    </button> &nbsp;
+                                    <button type="submit" class="btn btn-danger " id="btnCancel" value="cancel" data-url='#' data-query="EmployeCD,fromdate,todate" data-targetid="tbListEmploy">
+                                        <i class="fa dt-button"></i>
+                                        @L("Cancel")
+                                    </button>
+                                    
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="DNHtable customTMS" target_table="Timesheet" PageName='@L("")' CusLink="GetSearchData" fcol="0" disedit="0" np="scanList" ofn="CheckVisiable(this)"></div>
+    <script language="javascript">
+        
+        function selectRow(ob) {
+
+            var aray = $(ob).find("form").serializeArray();
+
+            var visIdx = $(ob).index();
+
+            var idx = table.row($(ob).parent()).index();
+            var rowData = table.rows(visIdx).data().toArray();
+            var row = $(ob).closest("tr").find("input.rqtNote");
+            var Currenttd = $(ob).closest("td").find("input[type=hidden]");
+            var mySelectedData = eval($(Currenttd).val());
+            var allowEdit = mySelectedData[0].AllowEdit;
+
+
+            var isCheck = $(ob).is(':checked');
+            if (!isCheck) {
+                $(row).attr("readonly", true);
+            } else {
+
+                if (allowEdit == "True") {
+                    $(row).attr("readonly", false);
+                } else {
+                    //$("#btnSubmit").prop("disabled", true)
+                }
+            }
+            if (allowEdit != "True") {
+                $(ob).css('display', 'none');
+            }
+
+            //alert();
+            //  var arrylist = $(row).find("input");
+            //    alert(row.length);
+            //alert(JSON.stringify(table.rows(visIdx)));
+            //alert(JSON.stringify(idx));
+            //alert(table.row(this).data());
+            //table.cell(idx, visIdx).data(aray[0].value)
+            //var rowData = table.row($(ob).parent()).data();
+
+
+            //return { objdata: JSON.stringify(rowData) };
+        }
+        
+        $("#btnSubmit").prop("disabled", true)
+        function CheckVisiable(ob) {
+            $(ob).find('input.selectcol').each(function () {
+                var Currenttd = $(this).closest("td").find("input[type=hidden]");
+                var mySelectedData = eval($(Currenttd).val());
+                var allowEdit = mySelectedData[0].AllowEdit;
+                var isWK = mySelectedData[0].isWK;
+                var IsHoliday = mySelectedData[0].isHLD;
+                if (allowEdit != "True") {
+                    $(this).css('display', 'none');
+                }
+                if (isWK == "True") {
+                    $(this).closest("tr").addClass('weekend');
+                }
+                if (IsHoliday == "True") {
+                    $(this).closest("tr").addClass('holiday');
+                }
+            });
+            // alert("test");
+        }
+        //$($(myselect)).ready(function () {
+        //    alert("test");
+        //    $(".selectcol").ready(function () {
+        //        alert("test");
+        //    });
+        //});
+    </script>
+}

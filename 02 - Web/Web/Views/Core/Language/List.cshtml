@@ -1,0 +1,18 @@
+@using Biz.Core.Models
+@model LanguageCollection
+@{
+    ViewBag.Title = "Language";
+  
+}
+@using (Ajax.BeginForm("LanguageEvt", "Language", 
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+        UpdateTargetId ="Languagelist",
+        OnBegin = "onBegin", 
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+	
+    <div class="DNHtable" target_table="Language" PageName='@L("Language")'></div>
+	
+}

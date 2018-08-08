@@ -1,0 +1,26 @@
+@{
+    Guid? NodeID = ViewBag.NodeID;
+   
+
+}
+    
+    <div class="row">
+      
+@using (Ajax.BeginForm("SiteMapEvt", "SiteMap",
+                new AjaxOptions
+                {
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "POST",
+                    UpdateTargetId = "MySiteMap",
+                    OnBegin = "onBegin",
+                    OnComplete = "onComplete",
+                }, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+        
+            <div id="SitemapChild" class="DNHtable" target_table="Sitemap" PageName="Sitemap" fcol="0"
+                  SaveUrl='@Url.Action("Create","Sitemap", new  {ParentID=@NodeID.ToString() })'  CusLink="GetSitemapNodeID?NodeID=@NodeID.ToString()"></div>
+              
+
+}
+    </div>
+    

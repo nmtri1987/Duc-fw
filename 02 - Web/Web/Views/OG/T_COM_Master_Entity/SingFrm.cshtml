@@ -1,0 +1,172 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using Biz.OG.Models;
+@model T_COM_Master_Entity
+@{
+    ViewBag.Title = "T_COM_Master_Entity";
+}
+<div class="row">
+    @using (Ajax.BeginForm("Create", "T_COM_Master_Entity",
+                                        new AjaxOptions
+                                        {
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "T_COM_Master_Entitylist",
+                                            LoadingElementId = "loadingDisplay",
+                                            OnSuccess = "closePopup()",
+                                            OnBegin = "onBegin",
+                                            OnComplete = "onComplete",
+                                        }, new { @class = "form-horizontal", @id = "frmT_COM_Master_Entity", enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.EntityId,new {@class= "form-control" })
+
+     
+        <div class="ibox float-e-margins">
+            
+            <div class="ibox-title">
+                <div class="panel-heading">
+                    <button type="submit" class="btn btn-sm btn-primary" name="btnsave" value="save"><i class="fa fa-save"></i></button>
+                    <button class="btn btn-sm btn-primary" type="button" name="Action" value="Refresh" data-url = "/T_COM_Master_Entity/Get" data-key-id="EntityId" data-form-id = "frmT_COM_Master_Entity" data-action="refresh" onclick="RefreshForm(this)"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-sm btn-primary" data-url ="/T_COM_Master_Entity/Get" data-action="add" data-form-id = "frmT_COM_Master_Entity" data-key-id="EntityId" onclick="RefreshForm(this)">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-primary" data-url="/T_COM_Master_Entity/T_COM_Master_EntityEvt" data-action="delete" data-form-id="frmT_COM_Master_Entity" data-key-id="EntityId" onclick="DeleteData(this)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+               @* @L("T_COM_Master_Entity")*@
+            </div>
+            <div class="ibox-content">
+                <div id="loadingDisplay" class="progressBarLoad">
+                    <h2>@L("Progressing")...</h2>
+                    <div class="progress progress-striped ">
+                        <div id="loadProgressBar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">@L("EntityId")</label>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.EntityId, new { htmlAttributes = new { @class = "form-control T_COM_Master_Entitysrc", @placeholder = L("EntityId"), @data_url = "/T_COM_Master_Entity/Search", @data_form_id = "frmT_COM_Master_Entity" } })
+                        @Html.ValidationMessageFor(model => model.EntityId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+			      <div class="form-group">
+             <label class="col-sm-2 control-label">@L("EntityId")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.EntityId, new { htmlAttributes = new { @class = "form-control",@disabled = ""} })
+               @Html.ValidationMessageFor(model => model.EntityId, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ShortName_EN")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ShortName_EN, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ShortName_EN")} })
+               @Html.ValidationMessageFor(model => model.ShortName_EN, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ShortName_VT")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ShortName_VT, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ShortName_VT")} })
+               @Html.ValidationMessageFor(model => model.ShortName_VT, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("LongName_EN")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LongName_EN, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("LongName_EN")} })
+               @Html.ValidationMessageFor(model => model.LongName_EN, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("LongName_VT")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LongName_VT, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("LongName_VT")} })
+               @Html.ValidationMessageFor(model => model.LongName_VT, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("Description")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("Description")} })
+               @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("Address_EN")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Address_EN, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("Address_EN")} })
+               @Html.ValidationMessageFor(model => model.Address_EN, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("Address_VT")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Address_VT, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("Address_VT")} })
+               @Html.ValidationMessageFor(model => model.Address_VT, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("PerDayWorkingHour")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.PerDayWorkingHour, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("PerDayWorkingHour")} })
+               @Html.ValidationMessageFor(model => model.PerDayWorkingHour, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("CreatedBy")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("CreatedBy")} })
+               @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("CreatedDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("CreatedDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ModifiedBy")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ModifiedBy, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ModifiedBy")} })
+               @Html.ValidationMessageFor(model => model.ModifiedBy, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ModifiedDate")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.ModifiedDate, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("ModifiedDate")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("IsAcitve")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.IsAcitve, new { htmlAttributes = new { @class = "form-control i-checks js-switch", @placeholder=L("IsAcitve")} })
+               @Html.ValidationMessageFor(model => model.IsAcitve, "", new { @class = "text-danger" })
+             </div>
+         </div>
+             
+            </div>
+
+
+        </div>
+
+
+    }
+
+</div>
+
+  <script>
+        $(document).ready(function () {
+            $('#EntityId').onfocus(function (e) {
+               LoadAutoComplete(this);
+            });
+			 $('.date').datepicker({
+		     todayBtn: "linked",
+		     keyboardNavigation: false,
+		     forceParse: false,
+		     calendarWeeks: true,
+		     autoclose: true
+		 });
+        });
+
+    </script>

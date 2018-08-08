@@ -1,0 +1,145 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using BRVH.HR.OG.Models;
+@model TimeLog
+@{
+    ViewBag.Title = "TimeLog";
+}
+<div class="row">
+    @using (Ajax.BeginForm("Create", "TimeLog",
+                                        new AjaxOptions
+                                        {
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "TimeLoglist",
+                                            LoadingElementId = "loadingDisplay",
+                                            OnSuccess = "closePopup()",
+                                            OnBegin = "onBegin",
+                                            OnComplete = "onComplete",
+                                        }, new { @class = "form-horizontal", @id = "frmTimeLog", enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.TimeLogId,new {@class= "form-control" })
+
+     
+        <div class="ibox float-e-margins">
+            
+            <div class="ibox-title">
+                <div class="panel-heading">
+                    <button type="submit" class="btn btn-sm btn-info" name="btnsave" value="save"><i class="fa fa-save"></i></button>
+                    <button class="btn btn-sm btn-info" type="button" name="Action" value="Refresh" data-url = "/TimeLog/Get" data-key-id="TimeLogId" data-form-id = "frmTimeLog" data-action="refresh" onclick="RefreshForm(this)"><i class="fa fa-refresh"></i></button>
+                    <button type="button" class="btn btn-sm btn-info" data-url ="/TimeLog/Get" data-action="add" data-form-id = "frmTimeLog" data-key-id="TimeLogId" onclick="RefreshForm(this)">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-info" data-url="/TimeLog/TimeLogEvt" data-action="delete" data-form-id="frmTimeLog" data-key-id="TimeLogId" onclick="DeleteData(this)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+               @* @ngonngu("TimeLog")*@
+            </div>
+            <div class="ibox-content">
+                <div id="loadingDisplay" class="progressBarLoad">
+                    <h2>@ngonngu("Progressing")...</h2>
+                    <div class="progress progress-striped ">
+                        <div id="loadProgressBar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">@ngonngu("TimeLogId")</label>
+                    <div class="col-sm-10">
+                        @Html.EditorFor(model => model.TimeLogId, new { htmlAttributes = new { @class = "form-control TimeLogsrc", @placeholder = ngonngu("TimeLogId"), @data_url = "/TimeLog/Search", @data_form_id = "frmTimeLog" } })
+                        @Html.ValidationMessageFor(model => model.TimeLogId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+			      <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("TimeLogId")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.TimeLogId, new { htmlAttributes = new { @class = "form-control",@disabled = ""} })
+               @Html.ValidationMessageFor(model => model.TimeLogId, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("LAC")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.LAC, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("LAC")} })
+               @Html.ValidationMessageFor(model => model.LAC, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("ReaderType")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ReaderType, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("ReaderType")} })
+               @Html.ValidationMessageFor(model => model.ReaderType, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("Door")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Door, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("Door")} })
+               @Html.ValidationMessageFor(model => model.Door, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("Name")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("Name")} })
+               @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("AssignID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.AssignID, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("AssignID")} })
+               @Html.ValidationMessageFor(model => model.AssignID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("Department")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("Department")} })
+               @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("AccessType")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.AccessType, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("AccessType")} })
+               @Html.ValidationMessageFor(model => model.AccessType, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("DateLog")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.DateLog, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("DateLog")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.DateLog, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@ngonngu("TimeLogs")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.TimeLogs, new { htmlAttributes = new { @class = "form-control ", @placeholder=ngonngu("TimeLogs")} })
+               @Html.ValidationMessageFor(model => model.TimeLogs, "", new { @class = "text-danger" })
+             </div>
+         </div>
+             
+            </div>
+
+
+        </div>
+
+
+    }
+
+</div>
+
+  <script>
+        $(document).ready(function () {
+            $('#TimeLogId').onfocus(function (e) {
+               LoadAutoComplete(this);
+            });
+			 $('.date').datepicker({
+		     todayBtn: "linked",
+		     keyboardNavigation: false,
+		     forceParse: false,
+		     calendarWeeks: true,
+		     autoclose: true
+		 });
+        });
+
+    </script>

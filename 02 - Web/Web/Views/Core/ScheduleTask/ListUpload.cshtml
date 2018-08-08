@@ -1,0 +1,60 @@
+@{
+    ViewBag.Title = "ScheduleTask Import";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Ajax.BeginForm("ScheduleTaskEvt", "ScheduleTask",
+                                        new AjaxOptions
+                                        {
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "ScheduleTasklist",
+                                            OnBegin = "onBegin",
+                                            OnComplete = "onComplete",
+                                        }, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    
+    <div class="ibox-title">
+        <div class="panel-heading">
+          
+        </div>
+    </div>
+    <div class="ibox-content">
+
+        <div class="m-b-lg">
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">@L("SelectFile")</label>
+                <div class="col-sm-10">
+                    <input type="file" id="importScheduleTaskexcelfile" targetid="#preScheduleTask" name="importScheduleTaskexcelfile" class="fileupload" style="display:none;"
+                           link="/ScheduleTask/ImportExcelFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                    <button class="btn btn-primary SelectFile" type="button" targetid="importScheduleTaskexcelfile">@L("SelectFile")</button>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary list-panel" id="list-panel">
+                    <div class="panel-heading list-panel-heading" style="height:44px;">
+                        <h3 class="panel-title list-panel-title">@L("ScheduleTask")</h3>
+                    </div>
+                    <div class="panel-body">
+                        <button id="btnScheduleTaskSave" type="button" class="btn btn-primary btn-sm" link="/ScheduleTask/SaveExcel"><span class="fa fa-save" aria-hidden="true"></span></button>
+                        <button type="button" class="btn btn-default btn-sm refresh-button"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+                        <hr />
+                        <div class="table-responsive">
+                            <table id="preScheduleTask" class="table table-striped table-bordered" data-url='@Url.Action("GetGata", "ScheduleTask")' savebtn="btnScheduleTaskSave"
+                                   arrid="ScheduleTaskarr" key="Id" default-search="" allow-search="1" allow-chk="1" style="width:100%"></table>
+                            <input type='hidden' value="['CompanyID','Id','Name','Seconds','Type','Enabled','StopOnError','LeasedByMachineName','LeasedUntilUtc','LastStartUtc','LastEndUtc','LastSuccessUtc','CreatedDate','CreatedUser','ScreenID',]" id='ScheduleTaskarr' />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+    <script src="~/Scripts/model/fnIfind.js"></script>
+            
+}

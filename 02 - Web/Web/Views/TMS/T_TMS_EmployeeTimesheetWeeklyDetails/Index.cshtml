@@ -1,0 +1,11 @@
+@{
+    ViewBag.Title = L("T_TMS_EmployeeTimesheetWeeklyDetails");
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+<div id="T_TMS_EmployeeTimesheetWeeklyDetailslist">
+    @Html.Action("List")
+</div>

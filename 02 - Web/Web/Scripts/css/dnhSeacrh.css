@@ -1,0 +1,38 @@
+﻿
+.DNHSearchTable{
+    background: white;
+    position: absolute;
+    max-width: 650px;
+    z-index: 9;
+    border: 1px #a5a3a3 solid;
+    box-shadow: 1px 2px 2px 1px #a5a3a3;
+}
+.DNHSearchTable td,.DNHSearchTable th{
+    padding:5px;
+    border-top: 1px solid #e7eaec;
+    line-height: 1.42857;
+    vertical-align: middle;
+    font-size:13px;
+
+}
+
+.DNHSearchTable .page-link{
+    padding:4px 10px;
+}
+.DNHSearchTable .dataTables_filter{
+    display:none;
+}
+.panel-heading {
+    background-color: #007acc;
+    border-left: 1px solid #007acc;
+    border-right: 1px solid #007acc;
+    border-top: 1px solid #007acc;
+    color: rgba(255, 255, 255, 0.87);
+    font-size: 10pt;
+    font-weight: 700;
+    padding: 3px 1px 3px 8px;
+}
+.DNHSearchTable tbody tr:hover{
+    background-color:#64cacc !important;
+    cursor:pointer;
+}

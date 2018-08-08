@@ -1,0 +1,11 @@
+@{
+    ViewBag.Title = "UserInRoles";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+<div id="UserInRolesList">
+    @Html.Action("List")
+</div>

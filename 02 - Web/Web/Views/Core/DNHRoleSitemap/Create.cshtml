@@ -1,0 +1,55 @@
+@using Biz.Core.Models
+@model DNHRoleSitemap
+@{
+
+    ViewBag.Title = "RoleSitemap";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+@using (Ajax.BeginForm("Save", "RoleSitemap",
+                                        new AjaxOptions
+                                        {
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "DNHRoleSitemaplist",
+                                            LoadingElementId = "loadingDisplay",
+                                            OnSuccess = "closePopup()",
+                                            OnBegin = "onBegin",
+                                            OnComplete = "onComplete",
+                                        }, new { @class = "form form-horizontal ", enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title" id="from-actions-bottom-right"> @L("DNHRoleSitemap")</h4>
+            <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+            <div class="heading-elements">
+                <ul class="list-inline mb-0">
+                    <li><a data-action="close"><i class="ft-x"></i></a></li>
+                </ul>
+            </div>
+            <div class="card-body collapse in">
+                <div class="card-block">
+                    <div class="form-body">
+                        @Html.EditorFor(model => model.CompanyID, new { htmlAttributes = new { @class = "form-control ", @placeholder = L("CompanyID") } })
+                        @Html.EditorFor(model => model.RoleName, new { htmlAttributes = new { @class = "form-control ", @placeholder = L("RoleName") } })
+                        @Html.EditorFor(model => model.NodeID, new { htmlAttributes = new { @class = "form-control", @disabled = "" } })
+                        @Html.EditorFor(model => model.Access, new { htmlAttributes = new { @class = "form-control ", @placeholder = L("Access") } })
+                        @Html.EditorFor(model => model.CreatedUser, new { htmlAttributes = new { @class = "form-control ", @placeholder = L("CreatedUser") } })
+                        @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "form-control ", @placeholder = L("CreateDate") } })
+                      
+                    </div>
+                    <div class="form-actions right"> <button type="submit" class="btn btn-primary btn-block" name="btnsave" value="save">@L("SaveChange")</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+
+@Scripts.Render("~/bundles/jqueryval")
+

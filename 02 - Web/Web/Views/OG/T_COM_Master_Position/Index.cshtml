@@ -1,0 +1,11 @@
+@{
+    ViewBag.Title = "T_COM_Master_Position";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+<div id="T_COM_Master_Positionlist">
+    @Html.Action("List")
+</div>

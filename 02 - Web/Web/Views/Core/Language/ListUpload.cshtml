@@ -1,0 +1,60 @@
+@{
+    ViewBag.Title = "Language Import";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Ajax.BeginForm("LanguageEvt", "Language",
+                                        new AjaxOptions
+                                        {
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "Languagelist",
+                                            OnBegin = "onBegin",
+                                            OnComplete = "onComplete",
+                                        }, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    
+    <div class="ibox-title">
+        <div class="panel-heading">
+          
+        </div>
+    </div>
+    <div class="ibox-content">
+
+        <div class="m-b-lg">
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">@L("SelectFile")</label>
+                <div class="col-sm-10">
+                    <input type="file" id="importLanguageexcelfile" targetid="#preLanguage" name="importLanguageexcelfile" class="fileupload" style="display:none;"
+                           link="/Language/ImportExcelFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                    <button class="btn btn-primary SelectFile" type="button" targetid="importLanguageexcelfile">@L("SelectFile")</button>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary list-panel" id="list-panel">
+                    <div class="panel-heading list-panel-heading" style="height:44px;">
+                        <h3 class="panel-title list-panel-title">@L("Language")</h3>
+                    </div>
+                    <div class="panel-body">
+                        <button id="btnLanguageSave" type="button" class="btn btn-primary btn-sm" link="/Language/SaveExcel"><span class="fa fa-save" aria-hidden="true"></span></button>
+                        <button type="button" class="btn btn-default btn-sm refresh-button"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+                        <hr />
+                        <div class="table-responsive">
+                            <table id="preLanguage" class="table table-striped table-bordered" data-url='@Url.Action("GetGata", "Language")' savebtn="btnLanguageSave"
+                                   arrid="Languagearr" key="LanguageId" default-search="" allow-search="1" allow-chk="1" style="width:100%"></table>
+                            <input type='hidden' value="['CompanyID','LanguageId','Name','LanguageCulture','Published','DisplayOrder','CreatedUser','CreatedDate',]" id='Languagearr' />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+    <script src="~/Scripts/model/fnIfind.js"></script>
+            
+}

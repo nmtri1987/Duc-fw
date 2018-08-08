@@ -1,0 +1,11 @@
+@{
+    ViewBag.Title = "ScheduleTask";
+     if (!QueryStringBool("ajax"))
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<div id="ScheduleTasklist">
+    @Html.Action("List")
+</div>

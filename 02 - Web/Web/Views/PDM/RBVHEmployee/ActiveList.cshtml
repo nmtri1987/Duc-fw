@@ -1,0 +1,20 @@
+@using Biz.OG.Models
+
+@{
+    ViewBag.Title = "Employee Activation";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+@using (Ajax.BeginForm("T_COM_Master_EmployeeEvt", "RBVHEmployee", 
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+        UpdateTargetId ="T_COM_Master_Employeelist",
+        OnBegin = "onBegin", 
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+	
+    <div class="DNHtable" target_table="RBVHEmployee" PageName='@L("EmployeeActivation")' disedit="1" CusLink='GetActiveData' fcol="5"></div>
+}

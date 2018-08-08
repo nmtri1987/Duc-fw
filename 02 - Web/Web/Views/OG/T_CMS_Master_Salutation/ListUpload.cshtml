@@ -1,0 +1,60 @@
+@{
+    ViewBag.Title = "T_CMS_Master_Salutation Import";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Ajax.BeginForm("T_CMS_Master_SalutationEvt", "T_CMS_Master_Salutation",
+                                        new AjaxOptions
+                                        {
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "T_CMS_Master_Salutationlist",
+                                            OnBegin = "onBegin",
+                                            OnComplete = "onComplete",
+                                        }, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+    
+    <div class="ibox-title">
+        <div class="panel-heading">
+          
+        </div>
+    </div>
+    <div class="ibox-content">
+
+        <div class="m-b-lg">
+
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">@ngonngu("SelectFile")</label>
+                <div class="col-sm-10">
+                    <input type="file" id="importT_CMS_Master_Salutationexcelfile" targetid="#preT_CMS_Master_Salutation" name="importT_CMS_Master_Salutationexcelfile" class="fileupload" style="display:none;"
+                           link="/T_CMS_Master_Salutation/ImportExcelFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                    <button class="btn btn-info SelectFile" type="button" targetid="importT_CMS_Master_Salutationexcelfile">@ngonngu("SelectFile")</button>
+                </div>
+            </div>
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary list-panel" id="list-panel">
+                    <div class="panel-heading list-panel-heading" style="height:44px;">
+                        <h3 class="panel-title list-panel-title">@ngonngu("T_CMS_Master_Salutation")</h3>
+                    </div>
+                    <div class="panel-body">
+                        <button id="btnT_CMS_Master_SalutationSave" type="button" class="btn btn-info btn-sm" link="/T_CMS_Master_Salutation/SaveExcel"><span class="fa fa-save" aria-hidden="true"></span></button>
+                        <button type="button" class="btn btn-default btn-sm refresh-button"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+                        <hr />
+                        <div class="table-responsive">
+                            <table id="preT_CMS_Master_Salutation" class="table table-striped table-bordered" data-url='@Url.Action("GetGata", "T_CMS_Master_Salutation")' savebtn="btnT_CMS_Master_SalutationSave"
+                                   arrid="T_CMS_Master_Salutationarr" key="SalutationID" default-search="" allow-search="1" allow-chk="1" style="width:100%"></table>
+                            <input type='hidden' value="['SalutationID','Salutation_EN','Salutation_VN','Gender','IsActive','CreatedBy','CreatedDate','ModifiedBy','ModifiedDate',]" id='T_CMS_Master_Salutationarr' />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+    <script src="~/Scripts/model/fnIfind.js"></script>
+            
+}

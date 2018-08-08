@@ -1,0 +1,14 @@
+@{
+    ViewBag.Title = "ScheduleTask";
+  
+}
+@using (Ajax.BeginForm("ScheduleTaskEvt", "ScheduleTask", 
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+        UpdateTargetId ="ScheduleTasklist",
+        OnBegin = "onBegin", 
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+	 <div class="DNHtable" target_table="ScheduleTask" PageName='@L("ScheduleTask")'></div>
+}

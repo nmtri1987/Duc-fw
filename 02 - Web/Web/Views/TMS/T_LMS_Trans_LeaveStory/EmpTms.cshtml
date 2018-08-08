@@ -1,0 +1,20 @@
+
+@{
+    ViewBag.Title = "hrm_atd_ScanTime";
+    string EmployeeCode =QueryString("EmpCode");
+   string WD =QueryString("WD");
+        Layout = "~/Views/Shared/_Layout.cshtml";
+   
+  
+}
+@using (Ajax.BeginForm("hrm_atd_ScanTimeEvt", "LeaveStory", 
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+        UpdateTargetId ="hrm_atd_ScanTimelist",
+        OnBegin = "onBegin", 
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+
+    <div class="DNHtable fixtable" target_table="LeaveStory" PageName='@L("LeaveStory")' CusLink="GetEmpGata?EmployeeCode=@EmployeeCode&WD=@WD"></div>
+}

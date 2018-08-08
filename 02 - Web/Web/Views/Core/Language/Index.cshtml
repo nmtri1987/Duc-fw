@@ -1,0 +1,11 @@
+@{
+    ViewBag.Title = "Language";
+     if (!QueryStringBool("ajax"))
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<div id="Languagelist">
+    @Html.Action("List")
+</div>

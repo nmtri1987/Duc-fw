@@ -1,0 +1,54 @@
+﻿<nav role="navigation" class="navbar-default navbar-static-side">
+    <div class="sidebar-collapse">
+        <ul id="side-menu" class="nav" style="display: block;">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <span>
+                        <img src="~/images/Default/usrimg_small.png" class="img-circle " alt="image">
+                    </span>
+                    <a href='' class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="clear">
+                            <span class="block m-t-xs">
+                                <strong class="font-bold">@CurrentUser.EmployeeName</strong>
+                            </span> <span class="text-muted text-xs block">@CurrentUser.PositionName<b class="caret"></b></span>
+                        </span>
+                    </a>
+                    @*<ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="#" class="mysitemap" link="~/RBVHEmployee/Info?EmployeeCode=@CurrentUser.EmployeeCode" dis="mainctn">Profile</a></li>
+                        @*<li><a href="contacts.html">Contacts</a></li>
+                        <li><a href="mailbox.html">Mailbox</a></li>
+                        <li class="divider"></li>
+                        <li><a href="login.html">Logout</a></li>
+                    </ul>*@
+                </div>
+                <div class="logo-element">
+                    RB+
+                </div>
+            </li>
+            <li class="active">
+                <a href="#"><i class="fa fa-users"></i> <span class="nav-label">CMS</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse in">
+                    <li class="active">
+                    <a class="mysitemap" title='@L("Contract")' href="#" link="~/contract" dis="mainctn"><i class="glyphicon glyphicon-triangle-right"></i><span class="nav-label">@L("Contract")</span></a></li>
+                    @*<li class="active"><a class="mysitemap" title='@L("Position")' href="#" link="~/Position" dis="mainctn"><i class="glyphicon glyphicon-triangle-right"></i><span class="nav-label">@L("Position")</span></a></li>*@
+                    
+                   
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-users"></i> <span class="nav-label">PDM</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse in">
+                    <li class="active"><a class="mysitemap" title='@L("Employee")' href="#" link="~/RBVHEmployee" dis="mainctn"><i class="glyphicon glyphicon-triangle-right"></i><span class="nav-label">@L("RBVHEmployee")</span></a></li>
+                    @*<li class="active"><a class="mysitemap" title='@L("Employee")' href="#" link="~/RBVHEmployee/Activelist" showLink="1" dis="mainctn"><i class="glyphicon glyphicon-triangle-right"></i><span class="nav-label">@L("EmployeeActivation")</span></a></li>*@
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Report</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse in">
+                    @*<li class="active"><a class="mysitemap" title='@L("MissingScanTime")' href="#" link="~/Report" dis="mainctn"><i class="glyphicon glyphicon-triangle-right"></i><span class="nav-label">@L("MissingScanTime")</span></a></li>*@
+                    <li class="active"><a class="mysitemap" title='@L("TMSEmployee")' href="#" link="~/Report/EmpTMS" dis="mainctn"><i class="glyphicon glyphicon-triangle-right"></i><span class="nav-label">@L("TMSEmployee")</span></a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

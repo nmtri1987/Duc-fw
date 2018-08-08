@@ -1,0 +1,126 @@
+@using Biz.OG.Services;
+@{
+    ViewBag.Title = "Apendix History";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+@using (Ajax.BeginForm("T_CMS_Master_ContractEvt", "Contract",
+                                                    new AjaxOptions
+                                                    {
+                                                        InsertionMode = InsertionMode.Replace,
+                                                        HttpMethod = "POST",
+                                                        UpdateTargetId = "T_CMS_Master_Contractlists",
+                                                        OnBegin = "onBegin",
+                                                        OnSuccess = "PrintPdf",
+                                                        OnComplete = "onComplete",
+                                                    }, new { @class = "form form-horizontal", enctype = "multipart/form-data", id = "myform" }))
+
+{
+    <section>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">@L("Contract")</h4>
+                        <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                        @*<div class="heading-elements">
+                            <ul class="list-inline mb-0">
+                                <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                <li><a data-action="close"><i class="ft-x"></i></a></li>
+                            </ul>
+                        </div>*@
+                    </div>
+                    <div class="card-body collapse in">
+
+                        <div class="card-block card-dashboard">
+                            <div class="dt-events-log">
+                                Contract Pending - List 
+                            </div>
+                            <div id="list-panel">
+
+
+                                <div class="panel-body">
+                                   
+                                    @*<button type="button" class="btn btn-sm btn-default btndtbEPPosition" data-target="#myModal" data-toggle="modal" data="add" link='@Url.Action("Create", "Contract", new { Code = "" })' dis="popcnt">
+                                            <i class="fa fa-pencil"></i>
+                                        </button>*@
+                                    @*<button class="btn btn-sm btn-default" type="submit" name="Action" value="Delete"><i class="fa fa-trash"></i></button>*@
+                                    <button type="button" class="btn btn-info  refresh-button refresh-btn"><span class="ft-rotate-cw" aria-hidden="true"></span></button>
+                                    <div class="filter" id="frmFilter" name="frmFilter">
+                                        <hr />
+                                        <h4 class="form-section"><i class="fa fa-filter"></i>  Contract History</h4>
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <label class="col-sm-2 control-label">@L("Entity")</label>
+                                                        <div class="col-sm-4">
+                                                            @Html.DropDownList("EntityId",
+                                        new SelectList(T_COM_Master_EntityManager.GetAllByEmployeeCode(CurrentUser.EmployeeCode), "EntityId", "ShortName_EN"), @L("-- All--"),
+                                        new { @class = "form-control chosen-select select-control frmfilter", @id = "EntityId" })
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label class="col-sm-2 control-label">@L("IsActive")</label>
+                                                            <div class="col-sm-2"><input type="checkbox" class="frmfilter i-checks" name="IsActive" /></div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                               
+                                               
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <div class="col-md-2">
+                                                    <button type="button" class="btn btn-primary pull-right" id="mysearch" data-url='@Url.Action("GetContractPendingData", "Contract")' data-query="EmployeCD,fromdate,todate" data-targetid="tbListEmploy">
+                                                        <i class="fa fa-search"></i>
+                                                        @L("Report")
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr />
+
+                                    <table id="dtbEPPosition" class="table table-striped table-bordered" data-url='#' header-link='@Url.Action("headerLink", "Contract")'
+                                           arr-id="EPPositionarr" key="ID" default-search="" allow-search="1" allow-chk="1" style="width:100%" exptargetid="btnExportExcel"></table>
+                                    <input type='hidden' value="['EmployeeNO','EmployeeCode','Fullname','GradeName','PostionName','DepartCD',{'name':'Joiningdate','type':'date'},{'name':'Grossoffer','type':'dipt'}]"
+                                           id='EPPositionarr' />
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script language="javascript">
+            $(function () {
+                $("#mysearch").click(function () {
+                    var Entity = $("#EntityId").val();
+                    if (Entity == "") {
+                        alert("Please select Entity");
+                        return;
+                    }
+                    var url = '@Url.Action("ContractPendingReport")';
+                    var js = form_to_json("myform", "frmfilter");
+                    url += "?searchprm=" + JSON.stringify(js);
+                    window.open(url);
+                    //$("#dtbEPPosition").attr("data-url", url);
+                    //$("#dtbEPPosition").DataTable().destroy();
+                    //$("#dtbEPPosition").html('');
+                    //TableReportShow("dtbEPPosition");
+                })
+            })
+
+        </script>
+    </section>
+}

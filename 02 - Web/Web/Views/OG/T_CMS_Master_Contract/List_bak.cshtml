@@ -1,0 +1,79 @@
+@using ifinds.Object.OG.Models
+@model T_CMS_Master_ContractCollection
+@{
+    ViewBag.Title = "T_CMS_Master_Contract";
+  
+}
+@using (Ajax.BeginForm("T_CMS_Master_ContractEvt", "T_CMS_Master_Contract", 
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+        UpdateTargetId ="T_CMS_Master_Contractlist",
+        OnBegin = "onBegin", 
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+@*<div  id="T_CMS_Master_Contractlist" class="row">*@
+ <div class="ibox-title">
+                <div class="panel-heading">
+                <button class="btn btn-sm btn-info" type="submit" name="Action" value="Delete"><i class="fa fa-trash"></i></button>
+                <button type="button" class="btn btn-sm btn-info T_CMS_Master_Contractbtn" data-target="#myModal" data-toggle="modal" data="add" link='@Url.Action("Create", "T_CMS_Master_Contract", new { Code = "" })' dis="popcnt">
+                    <i class="fa fa-pencil"></i>
+                </button>
+				</div>
+            </div>
+<div class="ibox-content">
+
+    <div class="m-b-lg">
+
+       
+        <div class="m-t-md">
+           
+            <strong>Count T_CMS_Master_Contract</strong>
+        </div>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <div class='w98'>
+            <table class="table table-striped table-bordered table-hover" id="dtbT_CMS_Master_Contract">
+                <thead>
+                    <tr>
+                        <th></th><th>@ngonngu("ID")</th><th>@ngonngu("EmployeeCode")</th><th>@ngonngu("ContractNo")</th><th>@ngonngu("StatusID")</th><th>@ngonngu("ApproverLevel")</th><th>@ngonngu("ContractLevel")</th><th>@ngonngu("SalutationID")</th><th>@ngonngu("FirstName_EN")</th><th>@ngonngu("MiddleName_EN")</th><th>@ngonngu("LastName_EN")</th><th>@ngonngu("FirstName_VN")</th><th>@ngonngu("MiddleName_VN")</th><th>@ngonngu("LastName_VN")</th><th>@ngonngu("DOB")</th><th>@ngonngu("POB")</th><th>@ngonngu("HighestDegree")</th><th>@ngonngu("EmpAddress")</th><th>@ngonngu("IDCardNo")</th><th>@ngonngu("IDDOI")</th><th>@ngonngu("IDPOI")</th><th>@ngonngu("PassportNo")</th><th>@ngonngu("PassportDOI")</th><th>@ngonngu("PassportPOI")</th><th>@ngonngu("LabourBookNo")</th><th>@ngonngu("LabourDOI")</th><th>@ngonngu("LabourPOI")</th><th>@ngonngu("ContractTerm")</th><th>@ngonngu("Joiningdate")</th><th>@ngonngu("Enddate")</th><th>@ngonngu("PositionID")</th><th>@ngonngu("LocationID")</th><th>@ngonngu("GradeID")</th><th>@ngonngu("DeptID")</th><th>@ngonngu("WorkHoursID")</th><th>@ngonngu("Grossoffer")</th><th>@ngonngu("AnnualLeave")</th><th>@ngonngu("EmpTypeID")</th><th>@ngonngu("EmpSubTypeID")</th><th>@ngonngu("WorkPermitNo")</th><th>@ngonngu("WorkPermitFrom")</th><th>@ngonngu("WorkPermitTo")</th><th>@ngonngu("HomeGrossOffer")</th><th>@ngonngu("HomeCountryCurrency")</th><th>@ngonngu("HomeGrossOfferEffectiveFrom")</th><th>@ngonngu("HomeGrossOfferEffectiveTo")</th><th>@ngonngu("RelocationallowanceCurrency")</th><th>@ngonngu("Relocationallowance")</th><th>@ngonngu("GoabroadallowanceCurrency")</th><th>@ngonngu("Goabroadallowance")</th><th>@ngonngu("WaivingallowanceCurrency")</th><th>@ngonngu("Waivingallowance")</th><th>@ngonngu("HostCountryCurrency")</th><th>@ngonngu("HostGrossOfferEffectiveFrom")</th><th>@ngonngu("HostGrossOfferEffectiveTo")</th><th>@ngonngu("Remarks")</th><th>@ngonngu("CreatedBy")</th><th>@ngonngu("CreatedDate")</th><th>@ngonngu("ModifiedBy")</th><th>@ngonngu("ModifiedDate")</th><th>@ngonngu("IsActive")</th><th>@ngonngu("ProbationsPeriod")</th><th>@ngonngu("OriginalDate")</th><th>@ngonngu("WorkFlowStatus")</th><th>@ngonngu("HandPhone")</th><th>@ngonngu("TempAddress")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (T_CMS_Master_Contract item in Model)
+            {
+              
+				 <tr>
+				   <td><input class='i-checks' type='checkbox' name='ID' value='@item.ID' /></td><td><a href='#Edit?ID=@item.ID' target='edit' class='T_CMS_Master_Contractbtn' 
+data-target='#myModal' data-toggle='modal' data='update' 
+link='@Url.Action("Update","T_CMS_Master_Contract", new { ID=item.ID })' dis='popcnt'>@item.ID</a></td><td>@item.EmployeeCode</td><td>@item.ContractNo</td><td>@item.StatusID</td><td>@item.ApproverLevel</td><td>@item.ContractLevel</td><td>@item.SalutationID</td><td>@item.FirstName_EN</td><td>@item.MiddleName_EN</td><td>@item.LastName_EN</td><td>@item.FirstName_VN</td><td>@item.MiddleName_VN</td><td>@item.LastName_VN</td><td>@ConvertDate(item.DOB,false)</td><td>@item.POB</td><td>@item.HighestDegree</td><td>@item.EmpAddress</td><td>@item.IDCardNo</td><td>@ConvertDate(item.IDDOI,false)</td><td>@item.IDPOI</td><td>@item.PassportNo</td><td>@ConvertDate(item.PassportDOI,false)</td><td>@item.PassportPOI</td><td>@item.LabourBookNo</td><td>@ConvertDate(item.LabourDOI,false)</td><td>@item.LabourPOI</td><td>@item.ContractTerm</td><td>@ConvertDate(item.Joiningdate,false)</td><td>@ConvertDate(item.Enddate,false)</td><td>@item.PositionID</td><td>@item.LocationID</td><td>@item.GradeID</td><td>@item.DeptID</td><td>@item.WorkHoursID</td><td>@item.Grossoffer</td><td>@item.AnnualLeave</td><td>@item.EmpTypeID</td><td>@item.EmpSubTypeID</td><td>@item.WorkPermitNo</td><td>@ConvertDate(item.WorkPermitFrom,false)</td><td>@ConvertDate(item.WorkPermitTo,false)</td><td>@item.HomeGrossOffer</td><td>@item.HomeCountryCurrency</td><td>@ConvertDate(item.HomeGrossOfferEffectiveFrom,false)</td><td>@ConvertDate(item.HomeGrossOfferEffectiveTo,false)</td><td>@item.RelocationallowanceCurrency</td><td>@item.Relocationallowance</td><td>@item.GoabroadallowanceCurrency</td><td>@item.Goabroadallowance</td><td>@item.WaivingallowanceCurrency</td><td>@item.Waivingallowance</td><td>@item.HostCountryCurrency</td><td>@ConvertDate(item.HostGrossOfferEffectiveFrom,false)</td><td>@ConvertDate(item.HostGrossOfferEffectiveTo,false)</td><td>@item.Remarks</td><td>@item.CreatedBy</td><td>@ConvertDate(item.CreatedDate,false)</td><td>@item.ModifiedBy</td><td>@ConvertDate(item.ModifiedDate,false)</td><td><input type='checkbox' value='@item.IsActive' disabled='' /> </td><td>@item.ProbationsPeriod</td><td>@ConvertDate(item.OriginalDate,false)</td><td>@item.WorkFlowStatus</td><td>@item.HandPhone</td><td>@item.TempAddress</td>
+				 </tr>
+                    }
+                   
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+  
+</div>
+<script>
+    $(document).ready(function () {
+
+        $('.T_CMS_Master_Contractbtn').click(function (e) {
+            e.preventDefault();
+            LoadAjaxTabView(this, e, false);
+        });
+		
+		    $('#dtbT_CMS_Master_Contract').dataTable({
+                responsive: true
+              
+            });
+
+    });
+</script>
+@*</div>*@
+}

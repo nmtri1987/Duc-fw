@@ -1,0 +1,36 @@
+@using Biz.Core.Utility
+@model object
+@{
+    var htmlAttributes = new RouteValueDictionary();
+
+    string strFieldName = ViewData.TemplateInfo.HtmlFieldPrefix;
+    string strController = "";
+    // htmlAttributes.Add("placeholder", strFieldName);
+    htmlAttributes.Add("class", "form-control dnhsearch");
+    htmlAttributes.Add("data_url", Url.Action("Search"));
+    htmlAttributes.Add("targetid", "src_" + strFieldName);
+    if (ViewBag.placeholder != null)
+    {
+        htmlAttributes.Add("placeholder", ViewBag.placeholder);
+    }
+    if (ViewBag.TargetController != null)
+    {
+        strController = ViewBag.TargetController;
+    }
+    htmlAttributes.Add("BindForm", ViewBag.BindForm);
+    htmlAttributes.Add("autocomplete", "off");
+
+}
+<div class="form-group@(Html.ValidationErrorFor(m => m, " has-error"))" id="gsearch_@strFieldName">
+    @Html.LabelFor(m => m, new { @class = "control-label" })
+    <div class="controls input-group">
+        @Html.TextBox(
+            "",
+            ViewData.TemplateInfo.FormattedModelValue,
+            htmlAttributes)
+        <span class="input-group-addon" data-toggle="collapse" data-target="#src_@strFieldName" aria-expanded="false"><i class="fa fa-search"></i></span>
+    </div>
+    @Html.ValidationMessageFor(m => m, null, new { @class = "help-block" })
+    <div class="DNHSearchTable collapse" target_table="@strController" PageName='@L("Search")' id="src_@strFieldName" TargetID="@strFieldName" BindForm="@ViewBag.BindForm"
+         FieldMapping="@ViewBag.FieldMapping"></div>
+</div>

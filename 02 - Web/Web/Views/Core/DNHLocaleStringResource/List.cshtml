@@ -1,0 +1,15 @@
+
+@{
+    ViewBag.Title = "DNHLocaleStringResource";
+  
+}
+@using (Ajax.BeginForm("DNHLocaleStringResourceEvt", "LocaleStringResource", 
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+        UpdateTargetId ="DNHLocaleStringResourcelist",
+        OnBegin = "onBegin", 
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+<div class="DNHtable" target_table="LocaleStringResource" PageName='@L("LocaleStringResource")' fcol="0"></div>
+}

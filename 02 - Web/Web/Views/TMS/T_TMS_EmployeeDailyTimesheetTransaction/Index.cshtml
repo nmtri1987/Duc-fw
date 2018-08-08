@@ -1,0 +1,11 @@
+@{
+    ViewBag.Title = "EmpTimesheet";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+<div id="EmpTimesheetlist">
+    @Html.Action("List")
+</div>

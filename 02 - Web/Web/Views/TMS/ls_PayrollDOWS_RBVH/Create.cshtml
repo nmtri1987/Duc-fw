@@ -1,0 +1,105 @@
+@using Biz.TMS.Models
+@model ls_PayrollDOWS_RBVH
+@{
+    ViewBag.Title = "ls_PayrollDOWS_RBVH";
+}
+@using (Ajax.BeginForm("Create", "ls_PayrollDOWS_RBVH", 
+    new AjaxOptions{
+        InsertionMode = InsertionMode.Replace ,
+        HttpMethod = "POST",
+		UpdateTargetId ="ls_PayrollDOWS_RBVHlist",
+        LoadingElementId ="loadingDisplay",
+        OnSuccess ="closePopup()",
+        OnBegin = "onBegin", 
+        OnComplete = "onComplete",
+    }, new { @class = "form-horizontal", enctype = "multipart/form-data" })){
+                    @Html.ValidationSummary(true)
+					 @Html.HiddenFor(m => m.ENtityID)
+ <div class="ibox float-e-margins">
+     <div class="ibox-title">
+         @L("ls_PayrollDOWS_RBVH")
+     </div>
+     <div class="ibox-content">
+	 <div id="loadingDisplay" class="progressBarLoad">
+             <h2>@L("Progressing")...</h2>
+             <div class="progress progress-striped ">
+                 <div id="loadProgressBar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+             </div>
+         </div>
+	   <div class="form-group">
+             <label class="col-sm-2 control-label">@L("Dow_ID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Dow_ID, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("Dow_ID")} })
+               @Html.ValidationMessageFor(model => model.Dow_ID, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("Dow_Code")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Dow_Code, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("Dow_Code")} })
+               @Html.ValidationMessageFor(model => model.Dow_Code, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("Beg_Day")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.Beg_Day, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("Beg_Day")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.Beg_Day, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("End_Day")</label>
+             <div class="col-sm-10 input-group date">
+               @Html.EditorFor(model => model.End_Day, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("End_Day")} })
+               <span class="input-group-addon">
+                 <i class="fa fa-calendar"></i>
+               </span>
+               @Html.ValidationMessageFor(model => model.End_Day, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("Dow_Num")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.Dow_Num, new { htmlAttributes = new { @class = "form-control ", @placeholder=L("Dow_Num")} })
+               @Html.ValidationMessageFor(model => model.Dow_Num, "", new { @class = "text-danger" })
+             </div>
+         </div>  <div class="form-group">
+             <label class="col-sm-2 control-label">@L("ENtityID")</label>
+             <div class="col-sm-10">
+               @Html.EditorFor(model => model.ENtityID, new { htmlAttributes = new { @class = "form-control",@disabled = ""} })
+               @Html.ValidationMessageFor(model => model.ENtityID, "", new { @class = "text-danger" })
+             </div>
+         </div>
+       
+
+     </div>
+     
+         <div class="hr-line-dashed"></div>
+
+         <div class="form-group">
+             <div class="col-sm-12">
+                 <button type="submit" class="btn btn-primary btn-block" name="btnsave" value="save">@L("SaveChange")</button>
+             </div>
+         </div>
+     </div>
+
+
+ }
+
+
+  @Scripts.Render("~/bundles/jqueryval")
+
+   <script>
+    $(document).ready(function () {
+	 var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+		 elems.forEach(function (html) {
+		     var switchery = new Switchery(html, { color: '#1AB394' });
+		 });
+		   $('.date').datepicker({
+		     todayBtn: "linked",
+		     keyboardNavigation: false,
+		     forceParse: false,
+		     calendarWeeks: true,
+		     autoclose: true
+		 });
+    });
+</script>

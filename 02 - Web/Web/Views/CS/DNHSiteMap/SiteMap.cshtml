@@ -1,0 +1,44 @@
+﻿@using Biz.Core.Models
+@using Biz.Core.Services
+@model DNHSiteMap
+@{
+    DNHSiteMapCollection myChild = DNHSiteMapManager.GetAllByUser(CurrentUser.UserName, Model.CompanyID, Model.NodeID);
+    DNHSiteMap objitem;
+    Guid ParentID = Guid.Empty;
+    string divID = "sml" + Model.NodeID;
+    if (myChild.Count > 0)
+    {
+        <div id="@divID" class='scsubmn'>
+            <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
+                @for (int j = 0; j < myChild.Count; j++)
+                {
+                    objitem = myChild[j];
+                    <li class="nav-item has-sub ">
+                        @if (objitem.IsFolder || objitem.Expanded || string.IsNullOrEmpty(objitem.Url) || objitem.Url == "#")
+                    {
+                            <a href="#" link='@DNHUrl(objitem.Url)' dis="mainctn"><i class="fa @objitem.IconImage "></i> @L(objitem.Title)</a>
+                        }
+                        else
+                        {
+                            <a class="mysitemap menu-item" href="#" link='@DNHUrl(objitem.Url)' dis="mainctn"><i class="fa @objitem.IconImage ft-layout"></i> @L(objitem.Title)</a>
+                        }
+                        @if (objitem != null)
+                    {
+                            <ul class="menu-content" style="">
+                                <li class="nav-item">
+
+
+                                    @if (myChild.Count > 0)
+                                    {
+                                        @Html.Partial("V1/SiteMap", objitem)
+                                    }
+                                </li>
+                            </ul>
+                        }
+                    </li>
+
+                }
+            </ul>
+        </div>
+    }
+}

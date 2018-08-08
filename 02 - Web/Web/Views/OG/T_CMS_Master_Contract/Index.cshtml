@@ -1,0 +1,11 @@
+@{
+    ViewBag.Title = "Contract";
+    if (!QueryStringBool("ajax"))
+    {
+        Layout = LayoutPage;
+    }
+}
+
+<div id="T_CMS_Master_Contractlist">
+    @Html.Action("List")
+</div>

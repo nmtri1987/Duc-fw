@@ -1,0 +1,82 @@
+@{
+    ViewBag.Title = "DNHUsers Import";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Ajax.BeginForm("DNHUsersEvt", "DNHUsers",
+                                        new AjaxOptions
+                                        {
+                                            InsertionMode = InsertionMode.Replace,
+                                            HttpMethod = "POST",
+                                            UpdateTargetId = "DNHUserslist",
+                                            OnBegin = "onBegin",
+                                            OnComplete = "onComplete",
+                                        }, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+{
+ <section>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">@L("DNHUsers")</h4>
+                        <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                        @*<div class="heading-elements">
+                                <ul class="list-inline mb-0">
+                                    <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
+                                    <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
+                                    <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                                    <li><a data-action="close"><i class="ft-x"></i></a></li>
+                                </ul>
+                            </div>*@
+                    </div>
+                    <div class="card-body collapse in">
+
+                        <div class="card-block card-dashboard">
+                            <div class="dt-events-log">
+                                DNHUsers - @L("Import Data")
+                            </div>
+                            <div class="ibox-content">
+
+                                <div class="m-b-lg">
+                                   
+                                    <form class="form form-horizontal striped-rows form-bordered">
+                                        <div class="form-group row">
+                                            <label class="col-md-3 label-control">@L("SelectFile")</label>
+                                            <div class="col-md-9">
+                                                <label id="projectinput8" class="file center-block">
+                                                    <input  type="file" id="importDNHUsersexcelfile" targetid="#preDNHUsers" name="importDNHUsersexcelfile" class="fileupload" style="display:none;"
+                           link="/DNHUsers/ImportExcelFile" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+                                                     <button class="btn btn-primary SelectFile" type="button" targetid="importDNHUsersexcelfile">@L("SelectFile")</button>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    
+                                    </form>
+                                    <hr />
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-success list-panel" id="list-panel">
+                                            <div class="panel-body">
+                                                <button id="btnDNHUsersSave" type="button" class="btn btn-primary btn-sm" link="/DNHUsers/SaveExcel"><span class="fa fa-save" aria-hidden="true"></span></button>
+    <button type="button" class="btn btn-default btn-sm refresh-button"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></button>
+                                                <hr />
+                                                <div>
+                                                    <table id="preDNHUsers" class="table table-striped table-bordered" data-url='@Url.Action("GetGata", "DNHUsers")' savebtn="btnDNHUsersSave"
+                                   arrid="DNHUsersarr" key="Id" default-search="" allow-search="1" allow-chk="1" style="width:100%"></table>
+                            <input type='hidden' value="['CompanyID','Id','Email','EmailConfirmed','PasswordHash','SecurityStamp','PhoneNumber','PhoneNumberConfirmed','TwoFactorEnabled','LockoutEndDateUtc','LockoutEnabled','AccessFailedCount','UserName','CreatedUser','CreatedDate','IsAdmin','Application',]" id='DNHUsersarr' />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="~/Scripts/model/fnIfind.js"></script>
+            
+}

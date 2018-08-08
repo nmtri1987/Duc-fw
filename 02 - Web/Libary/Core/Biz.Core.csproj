@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F76E5D3C-1517-46CC-8DD0-0BBFA9850016}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Biz.Core</RootNamespace>
+    <AssemblyName>Biz.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\..\..\..\Libary\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.76.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Libary\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.0.5.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\..\..\..\..\Libary\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownDeep">
+      <HintPath>..\..\..\..\05 - Libary\MarkdownDeep.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>..\..\..\..\05 - Libary\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attribute\ColumnAttribute.cs" />
+    <Compile Include="BaseEntity.cs" />
+    <Compile Include="Caching\Extensions.cs" />
+    <Compile Include="Caching\HttpCache.cs" />
+    <Compile Include="Caching\ICacheManager.cs" />
+    <Compile Include="Caching\MemoryCacheManager.cs" />
+    <Compile Include="ComponentModel\GenericDictionaryTypeConverter.cs" />
+    <Compile Include="ComponentModel\GenericListTypeConverter.cs" />
+    <Compile Include="Configuration\AppConfig.cs" />
+    <Compile Include="Configuration\ISettings.cs" />
+    <Compile Include="Config\SystemConfig.cs" />
+    <Compile Include="Config\SystemConst.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DNHRoleSitemapController.cs" />
+    <Compile Include="Controllers\DNHSiteMapController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocaleStringResourceController.cs" />
+    <Compile Include="Controllers\QueuedEmailController.cs" />
+    <Compile Include="Controllers\HRBPEmployeeController.cs" />
+    <Compile Include="Controllers\ScheduleTaskController.cs" />
+    <Compile Include="Controllers\SettingController.cs" />
+    <Compile Include="Controllers\RBVHEmployeeController.cs" />
+    <Compile Include="Convert\CollectionToDataTable.cs" />
+    <Compile Include="Convert\DataTableToCollection.cs" />
+    <Compile Include="DatatablesMvc\DataTablesBinder.cs" />
+    <Compile Include="DatatablesMvc\DataTablesJsonBinder.cs" />
+    <Compile Include="DatatablesMvc\DataTablesResponse.cs" />
+    <Compile Include="DatatablesMvc\IDataTablesRequest.cs" />
+    <Compile Include="DatatablesMvc\NameValueCollectionExtensions.cs" />
+    <Compile Include="DatatablesMvc\Search.cs" />
+    <Compile Include="Date\BDatetime.cs" />
+    <Compile Include="DecimalModelBinder.cs" />
+    <Compile Include="Enum\AccessRightsEnum.cs" />
+    <Compile Include="Enum\DayEnum.cs" />
+    <Compile Include="Extend\FormExtension.cs" />
+    <Compile Include="Helper\CommonHelper.cs" />
+    <Compile Include="Helper\ExcelHelper.cs" />
+    <Compile Include="Helper\FileInputHelper.cs" />
+    <Compile Include="Helper\HtmlHelper.cs" />
+    <Compile Include="Helper\HTMLToPDFBuilder.cs" />
+    <Compile Include="Helper\IOHelper.cs" />
+    <Compile Include="Helper\PdfHelper.cs" />
+    <Compile Include="Helper\SessionHelper.cs" />
+    <Compile Include="Helper\WebApiHelper.cs" />
+    <Compile Include="Helper\XMLHelper.cs" />
+    <Compile Include="IfindException.cs" />
+    <Compile Include="Infrastructure\AppDomainTypeFinder.cs" />
+    <Compile Include="Infrastructure\DependencyManagement\ContainerManager.cs" />
+    <Compile Include="Infrastructure\DependencyManagement\IDependencyRegistrar.cs" />
+    <Compile Include="Infrastructure\EngineContext.cs" />
+    <Compile Include="Infrastructure\IEngine.cs" />
+    <Compile Include="Infrastructure\IStartupTask.cs" />
+    <Compile Include="Infrastructure\ITypeFinder.cs" />
+    <Compile Include="Infrastructure\Mapper\AutoMapperConfiguration.cs" />
+    <Compile Include="Infrastructure\Mapper\IMapperConfiguration.cs" />
+    <Compile Include="Infrastructure\AppEngine.cs" />
+    <Compile Include="Infrastructure\Services\DefaultMachineNameProvider.cs" />
+    <Compile Include="Infrastructure\Services\IMachineNameProvider.cs" />
+    <Compile Include="Infrastructure\Singleton.cs" />
+    <Compile Include="Infrastructure\WebAppTypeFinder.cs" />
+    <Compile Include="Media\DownloadService.cs" />
+    <Compile Include="Media\IDownloadService.cs" />
+    <Compile Include="Models\AccessRights.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\DNHLocaleStringResource.cs" />
+    <Compile Include="Models\DNHRoleSitemap.cs" />
+    <Compile Include="Models\DNHSiteMap.cs" />
+    <Compile Include="Models\DNHSitemapAction.cs" />
+    <Compile Include="Models\DNHUsers.cs" />
+    <Compile Include="Models\Download.cs" />
+    <Compile Include="Models\EmailAccount.cs" />
+    <Compile Include="Models\EmployeeInRoles.cs" />
+    <Compile Include="Models\Language.cs" />
+    <Compile Include="Models\LocaleStringResource.cs" />
+    <Compile Include="Models\Messages\QueuedEmailPriority.cs" />
+    <Compile Include="Models\QueuedEmail.cs" />
+    <Compile Include="Models\Roles.cs" />
+    <Compile Include="Models\ScanTimeFilter.cs" />
+    <Compile Include="Models\ScheduleTask.cs" />
+    <Compile Include="Models\SequentNo.cs" />
+    <Compile Include="Models\Setting.cs" />
+    <Compile Include="Models\SiteMap.cs" />
+    <Compile Include="Models\UserActivity.cs" />
+    <Compile Include="Models\UserNotification.cs" />
+    <Compile Include="DatatablesMvc\Column.cs" />
+    <Compile Include="DatatablesMvc\ColumnCollection.cs" />
+    <Compile Include="Models\DropdownModelExcel.cs" />
+    <Compile Include="Models\ExcelCellModel.cs" />
+    <Compile Include="Models\JsonObject.cs" />
+    <Compile Include="Models\MessageNotification.cs" />
+    <Compile Include="Models\OpenHours.cs" />
+    <Compile Include="Model\T_CMS_Master_Contract.cs" />
+    <Compile Include="Models\T_COM_Master_Employee.cs" />
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="Model\UsersInRoles.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\SearchFilter.cs" />
+    <Compile Include="Security\AccessRightsAttribute.cs" />
+    <Compile Include="Security\BaseViewPage.cs" />
+    <Compile Include="Security\CryptoUtil.cs" />
+    <Compile Include="Security\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Security\CustomerAuthorize.cs" />
+    <Compile Include="Security\CustomPrincipal.cs" />
+    <Compile Include="Security\DNHUsersManager.cs" />
+    <Compile Include="Security\EncryptionService.cs" />
+    <Compile Include="Security\SecuritySettings.cs" />
+    <Compile Include="Services\AccessRightsManager.cs" />
+    <Compile Include="Services\Caching\ClearCacheTask.cs" />
+    <Compile Include="Services\CompanyManager.cs" />
+    <Compile Include="Services\CS\DNHRoleSitemapManager.cs" />
+    <Compile Include="Services\CS\DNHSitemapActionManager.cs" />
+    <Compile Include="Services\DNHLocaleStringResourceManager.cs" />
+    <Compile Include="Services\DNHSiteMapManager.cs" />
+    <Compile Include="Services\EmployeeInRolesManager.cs" />
+    <Compile Include="Services\IServiceManager.cs" />
+    <Compile Include="Services\LanguageManager.cs" />
+    <Compile Include="Services\LocaleStringResourceManager.cs" />
+    <Compile Include="Services\Message\DNHMessageTemplate.cs" />
+    <Compile Include="Services\Message\DNHMessageTemplateManager.cs" />
+    <Compile Include="Services\Message\EmailSender.cs" />
+    <Compile Include="Services\Message\IEmailSender.cs" />
+    <Compile Include="Services\Message\ITokenizer.cs" />
+    <Compile Include="Services\Message\MessageDelayPeriod.cs" />
+    <Compile Include="Services\Message\MessageTemplateExtensions.cs" />
+    <Compile Include="Services\Message\MessageTemplatesSettings.cs" />
+    <Compile Include="Services\Message\MessageTemplateSystemNames.cs" />
+    <Compile Include="Services\Message\MessageTokenProvider.cs" />
+    <Compile Include="Services\Message\QueuedEmailService.cs" />
+    <Compile Include="Services\Message\QueuedMessagesSendTask.cs" />
+    <Compile Include="Services\Message\Token.cs" />
+    <Compile Include="Services\Message\TokenGroupNames.cs" />
+    <Compile Include="Services\Message\Tokenizer.cs" />
+    <Compile Include="Services\Message\WorkflowMessageService.cs" />
+    <Compile Include="Services\RolesManager.cs" />
+    <Compile Include="Services\ScheduleTaskManager.cs" />
+    <Compile Include="Services\SequentNoManager.cs" />
+    <Compile Include="Services\SettingManager.cs" />
+    <Compile Include="Services\SiteMapManager.cs" />
+    <Compile Include="Services\T_CMS_Master_ContractManager.cs" />
+    <Compile Include="Services\T_COM_Master_EmployeeManager.cs" />
+    <Compile Include="Services\UserActivityManager.cs" />
+    <Compile Include="Services\UserNotificationManager.cs" />
+    <Compile Include="Services\UsersInRolesManager.cs" />
+    <Compile Include="Signalr\UserNotification.cs" />
+    <Compile Include="Signalr\UserOnline.cs" />
+    <Compile Include="Task\IScheduleTaskService.cs" />
+    <Compile Include="Task\ITask.cs" />
+    <Compile Include="Task\Task.cs" />
+    <Compile Include="Task\TaskManager.cs" />
+    <Compile Include="Task\TaskThread.cs" />
+    <Compile Include="Utility\DateTimeExtensions.cs" />
+    <Compile Include="Utility\LocalizationHelper.cs" />
+    <Compile Include="Utility\MarkdownHelper.cs" />
+    <Compile Include="Utility\Validation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UI\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

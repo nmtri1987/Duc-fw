@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{11FC041F-89A5-4154-B0DE-8AD83BA3529C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Biz.TMS</RootNamespace>
+    <AssemblyName>Biz.TMS</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.76.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\05 - Libary\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\..\..\05 - Libary\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\..\..\..\05 - Libary\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\..\..\05 - Libary\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\ls_PayrollDOWS_RBVHController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\T_LMS_Trans_LeaveStoryController.cs" />
+    <Compile Include="Controllers\EmpTimesheetController.cs" />
+    <Compile Include="Controllers\T_TMS_EmployeeDailyTimesheetTransactionController.cs" />
+    <Compile Include="Controllers\T_TMS_EmployeeTimesheetWeeklyDetailsController.cs" />
+    <Compile Include="Messages\MessageTokenProvider.cs" />
+    <Compile Include="Messages\TokenGroupNames.cs" />
+    <Compile Include="Messages\WorkflowMessageService.cs" />
+    <Compile Include="Models\EmpTaskFilter.cs" />
+    <Compile Include="Models\External_Times.cs" />
+    <Compile Include="Models\ls_PayrollDOWS_RBVH.cs" />
+    <Compile Include="Models\REmployee.cs" />
+    <Compile Include="Models\Report\MissingScanTime.cs" />
+    <Compile Include="Models\TMSMissingScanTime.cs" />
+    <Compile Include="Models\T_LMS_Trans_LeaveStory.cs" />
+    <Compile Include="Models\T_TMS_EmployeeDailyTimesheetTransaction.cs" />
+    <Compile Include="Models\T_TMS_EmployeeTimesheetWeeklyDetails.cs" />
+    <Compile Include="Services\EmpTaskManager.cs" />
+    <Compile Include="Services\ls_PayrollDOWS_RBVHManager.cs" />
+    <Compile Include="Services\REmployeeManager.cs" />
+    <Compile Include="Services\ReportManager.cs" />
+    <Compile Include="Services\T_LMS_Trans_LeaveStoryManager.cs" />
+    <Compile Include="Services\T_TMS_EmployeeDailyTimesheetTransactionManager.cs" />
+    <Compile Include="Services\T_TMS_EmployeeTimesheetWeeklyDetailsManager.cs" />
+    <Compile Include="Tasks\EmpDailyTask.cs" />
+    <Compile Include="Tasks\FiveDayReminders.cs" />
+    <Compile Include="TMSAreaRegistration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Biz.Core.csproj">
+      <Project>{f76e5d3c-1517-46cc-8dd0-0bbfa9850016}</Project>
+      <Name>Biz.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{19A59865-416F-47DA-8C19-5D458988D36A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DTP.Object</RootNamespace>
+    <AssemblyName>DTP.Object</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\05 - Libary\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\05 - Libary\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BaseEntity.cs" />
+    <Compile Include="Datehelper.cs" />
+    <Compile Include="dtpCache.cs" />
+    <Compile Include="GSM\Contacts.cs" />
+    <Compile Include="GSM\ContactsBackup.cs" />
+    <Compile Include="GSM\PhoneSetup.cs" />
+    <Compile Include="Object\AccessRights.cs" />
+    <Compile Include="Object\Account.cs" />
+    <Compile Include="Object\Area.cs" />
+    <Compile Include="Object\Branch.cs" />
+    <Compile Include="Object\CompanyTree.cs" />
+    <Compile Include="Object\CompanyTreeMember.cs" />
+    <Compile Include="Object\ComUserGroup.cs" />
+    <Compile Include="Object\Country.cs" />
+    <Compile Include="Object\DBgl_FriendRequest.cs" />
+    <Compile Include="Object\DBgl_UserInfo.cs" />
+    <Compile Include="Object\DBgl_Workflow.cs" />
+    <Compile Include="Object\DBtblCountry.cs" />
+    <Compile Include="Object\DBtblHouseBanking.cs" />
+    <Compile Include="Object\DBtblUser.cs" />
+    <Compile Include="Object\EmpBudgetSchedule.cs" />
+    <Compile Include="Object\EmpTrans.cs" />
+    <Compile Include="Object\EMP\EPEmployee.cs" />
+    <Compile Include="Object\EventItem.cs" />
+    <Compile Include="Object\EventType.cs" />
+    <Compile Include="Object\HBankRate.cs" />
+    <Compile Include="Object\ItemAttribute.cs" />
+    <Compile Include="Object\ItemClass.cs" />
+    <Compile Include="Object\ItemClassAttribute.cs" />
+    <Compile Include="Object\ItemEventMapping.cs" />
+    <Compile Include="Object\ItemImage.cs" />
+    <Compile Include="Object\ItemType.cs" />
+    <Compile Include="Object\MenuModel.cs" />
+    <Compile Include="Object\PayType.cs" />
+    <Compile Include="Object\Roles.cs" />
+    <Compile Include="Object\Search.cs" />
+    <Compile Include="Object\SiteMap.cs" />
+    <Compile Include="Object\sys_WebApiConfig.cs" />
+    <Compile Include="Object\UserHistory.cs" />
+    <Compile Include="Object\UserInfo.cs" />
+    <Compile Include="Object\UsersInRoles.cs" />
+    <Compile Include="Object\UserTran.cs" />
+    <Compile Include="Object\UserTranFilter.cs" />
+    <Compile Include="Personal\EmpLoan.cs" />
+    <Compile Include="Personal\SalaryConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SqlHelper.cs" />
+    <Compile Include="util\HtmlTag.cs" />
+    <Compile Include="util\IOHelper.cs" />
+    <Compile Include="util\xulyquery.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\DTP.Core\DTP.Core.csproj">
+      <Project>{9d270e78-1e44-49b2-89af-3bbd6e1fe8c0}</Project>
+      <Name>DTP.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\DTP.Data\DTP.Data.csproj">
+      <Project>{04689CFF-C530-469E-90AC-5A716440F90A}</Project>
+      <Name>DTP.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
